@@ -21,15 +21,14 @@ Tuya Connector FE SDK
 - [错误处理](#错误处理)
 - [请求配置](#请求配置)
 - [测试用例使用](#测试用例使用)
-- [demo说明](#demo说明)
 
 
 ## 简介
 
-Tuya Connector FE SDK 是 Tuya SaaS Admin 管理平台数据 Api 的 JavaScript 封装
-目前提供`账户登录和登出`, `修改密码`, `资产管理`, `设备管理`相关 Api
+Tuya Connector FE SDK 是 Tuya SaaS Admin 管理平台数据 API 的 JavaScript 封装。 
+目前提供`账户登录和登出`，`修改密码`，`资产管理`，`设备管理`相关 API。
 
-Demo 项目镜像请参考 [https://hub.docker.com/r/iotportal/iot-suite](https://hub.docker.com/r/iotportal/iot-suite)
+Demo 项目镜像请参考 [https://hub.docker.com/r/iotportal/iot-suite](https://hub.docker.com/r/iotportal/iot-suite)。
 
 
 ## 浏览器兼容
@@ -119,13 +118,17 @@ setGlobalConfig({})
 
 ## 方法说明
 #### login
-
+email 登录
 ```ts
 type UserToken = {
   nick_name: string, // 用户名
   token: string,
   role_type: number, // 角色类型，暂时先定为1
 }
+/**
+ * @param username: string
+ * @param pwd: string
+ */
 
 login('test', 'test').then((<UserToken>res) => {
   // 操作成功返回UserToken
@@ -135,6 +138,7 @@ login('test', 'test').then((<UserToken>res) => {
 ```
 
 #### multiLogin
+email 或者 手机号登录
 ```ts
 interface loginParams {
   userName?: string,
@@ -143,14 +147,16 @@ interface loginParams {
   phoneNum?: string,
 }
 
+// email 登录
 multiLogin({
-  userName: 'test',
+  userName: 'xxx@email.com',
   pwd: 'test',
 }).then((<UserToken>res) => {
   // 操作成功返回UserToken
   console.log(res)
 });
 
+// 手机号登录
 multiLogin({
   countryCode: '86',
   phoneNum: '13000000000',
@@ -162,6 +168,7 @@ multiLogin({
 ```
 
 #### logout
+登出
 ```ts
 logout().then(() => {
   // 服务器登录状态已清理，本地状态自行维护
@@ -169,27 +176,14 @@ logout().then(() => {
 });
 ```
 
-#### getVerifyCode
-```ts
-getVerifyCode({
-  country_code: '86',
-  telephone: '13000000000',
-}).then((res) => {
-  // boolean 成功失败
-  console.log(res);
-})
-
-getVerifyCode({
-  email: 'xxx@tuya.com',
-}).then((res) => {
-  // boolean 成功失败
-  console.log(res);
-})
-```
-
 #### resetPassword
-
+修改密码
 ```js
+/**
+ * @param username
+ * @param oldPwd
+ * @param newPwd
+ */
 resetPassword('test', '123', '321').then((res) => {
   // boolean 操作是否成功
   console.log(res);
@@ -205,7 +199,7 @@ resetPassword('test', '123', '321', {
 ```
 
 #### getChildrenAssetsByAssetId
-
+获取一级子资产列表
 ```ts
 type Asset = {
   asset_id: string;
@@ -213,22 +207,32 @@ type Asset = {
   full_asset_name: string;
 };
 
+/**
+ * @param assetId: string
+ */
 getChildrenAssetsByAssetId('1').then((res) => {
   console.log(<Asset[]>res);
 })
 ```
 
 #### searchAssetByName
-
+搜索资产
 ```ts
+/**
+ * @param assetName: string
+ */
 searchAssetByName('test').then((res) => {
   console.log(<Asset[]>res);
 })
 ```
 
 #### addAsset
-
+添加资产
 ```ts
+/**
+ * @param assetName: string,
+ * @param parentAssetId: string = "",
+ */
 addAsset('newAsset', '1').then((res) => {
   // 新增资产id
   console.log(<string>res)
@@ -236,7 +240,7 @@ addAsset('newAsset', '1').then((res) => {
 ```
 
 #### editAsset
-
+编辑资产名称
 ```ts
 type errorType = {
   apiMethodName: string;
@@ -245,6 +249,10 @@ type errorType = {
   httpCode: string;
 }
 
+/**
+ * @param assetId: string,
+ * @param assetName: string,
+ */
 editAsset('assetId', 'assetName').then((res) => {
   // 编辑成功
   console.log(<boolean>res)
@@ -255,7 +263,7 @@ editAsset('assetId', 'assetName').then((res) => {
 ```
 
 #### removeAsset
-
+移除资产
 ```ts
 type errorType = {
   apiMethodName: string;
@@ -264,6 +272,9 @@ type errorType = {
   httpCode: string;
 }
 
+/**
+ * @param assetId: string,
+ */
 removeAsset('assetId').then((res) => {
   // 删除资产成功
   console.log(<boolean>res)
@@ -274,7 +285,7 @@ removeAsset('assetId').then((res) => {
 ```
 
 #### getEntireTree
-
+获取整棵资产树
 ```ts
 type BaseAsset = {
   asset_id: string;
@@ -298,7 +309,11 @@ getEntireTree().then((res) => {
 ```
 
 #### getSubTree
+获取资产子树
 ```ts
+/**
+ * @param assetId: string,
+ */
 getSubTree('1').then((res) => {
   // 获取资产id为1的资产子树
   console.log(<AssetDeep>res);
@@ -337,7 +352,12 @@ type DeviceInfo = {
   status: DeviceStatus[];
 }
 
-getDevicesInfoByAssetId('1', 1, 10).then((res) => {
+/**
+ * @param assetId: string,
+ * @param pageNum: number,
+ * @param pageSize: number,
+ */
+getDevicesInfoByAssetId('1', 1, 20).then((res) => {
   console.log(<DeviceInfo[]>res);
 })
 ```
@@ -365,6 +385,9 @@ type DeviceInfo = {
   status: DeviceStatus[];
 }
 
+/**
+ * @param deviceId: string,
+ */
 getDeviceInfoByDeviceId('1').then((res) => {
   console.log(<DeviceInfo>res)
 })
@@ -373,6 +396,9 @@ getDeviceInfoByDeviceId('1').then((res) => {
 #### removeDeviceById
 删除设备
 ```ts
+/**
+ * @param deviceId: string,
+ */
 removeDeviceById('12').then((res) => {
   console.log(<boolean>res);
 })
@@ -381,6 +407,10 @@ removeDeviceById('12').then((res) => {
 #### modifyDeviceInfo 
 修改设备
 ```ts
+/**
+ * @param deviceId: string,
+ * @param devicename: string,
+ */
 modifyDeviceInfo('12', 'devicename').then((res) => {
   console.log(<boolean>res);
 })
@@ -392,6 +422,18 @@ modifyDeviceInfo('12', 'devicename').then((res) => {
 标准指令集详情地址，参考官网说明 https://developer.tuya.com/cn/docs/iot/open-api/standard-function/datatypedescription?id=K9i5ql2jo7j1k
 
 ```ts
+type DeviceStatus = {
+  code: string; // 	设备状态名
+  value: Object; // 设备状态值
+  options?: string; // dp取值配置
+  editable?: boolean; // 是否可编辑
+  name?: string; // dp名称
+  type?: string; // dp类型
+};
+/**
+ * @param deviceId: string,
+ * @param deviceStatuses: DeviceStatus[],
+ */
 modifyDeviceDP('12', [{code: '', value: 2}]).then((res) => {
   console.log(<boolean>res);
 })
@@ -403,6 +445,9 @@ modifyDeviceDP('12', [{code: '', value: 2}]).then((res) => {
 标准指令集详情地址，参考官网说明 https://developer.tuya.com/cn/docs/iot/open-api/standard-function/datatypedescription?id=K9i5ql2jo7j1k
 
 ```ts
+/**
+ * @param deviceId: string,
+ */
 getDeviceDP('12').then((res) => {
   console.log(res)
 })
@@ -410,9 +455,14 @@ getDeviceDP('12').then((res) => {
 
 #### getDeviceInfoWithDP
 获取设备信息和DP
-此方法为getDeviceDP 和 getDeviceInfoByDeviceId聚合结果
-将dp补充到deviceInfo 的 status字段中
+
+此方法为getDeviceDP 和 getDeviceInfoByDeviceId聚合结果，
+
+将dp补充到deviceInfo 的 status 字段中。
 ```ts
+/**
+ * @param deviceId: string,
+ */
 getDeviceInfoWithDP('deviceId1').then((res) => {
   console.log(<DeviceInfo>res);
 })
@@ -529,6 +579,7 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
 ```
 
 #### getProjectInfo
+获取绑定设备二维码信息
 
 ```ts
 type ProjectInfo = {
@@ -537,7 +588,7 @@ type ProjectInfo = {
 };
 
 getProjectInfo().then((res) => {
-  // 获取绑定设备二维信息成功
+  // 获取绑定设备二维码信息成功
   console.log(<ProjectInfo>res);
 })
 ```
@@ -553,7 +604,7 @@ apiService.getDeviceInfoByDeviceId('1').catch(({msg, code}) => {
 })
 ```
 或者
-在initConfig是注册全局错误处理方法
+在initConfig里，注册全局错误处理方法
 ```ts
 type ApiError = {
   httpCode: number, // http code
@@ -575,7 +626,9 @@ initConfig({
 ## 测试用例使用
 
 前置准备，启动mock server
+
 默认监听7001
+
 ```bash
 npm run testServer
 ```
@@ -583,20 +636,4 @@ npm run testServer
 单元测试启动命令
 ```bash
 npm run jest
-```
-
-## demo使用说明
-
-跳转到example目录
-cd example
-yarn
-等待node_modules初始化完成
-
-yarn run start
-至此，demo服务已可用
-
-后端mock服务启动
-另启新的终端，跳转到项目根目录
-```bash
-npm run testServer
 ```

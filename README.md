@@ -126,6 +126,10 @@ type UserToken = {
   token: string,
   role_type: number, // role type, temporarily set to 1
 }
+/**
+ * @param username: string
+ * @param pwd: string
+ */
 
 login('test','test').then((<UserToken>res) => {
   // Operation successfully returns UserToken
@@ -143,14 +147,16 @@ interface loginParams {
   phoneNum?: string,
 }
 
+// email
 multiLogin({
-  userName:'test',
+  userName:'xxx@email.com',
   pwd:'test',
 }).then((<UserToken>res) => {
   // Operation successfully returns UserToken
   console.log(res)
 });
 
+// telephone
 multiLogin({
   countryCode: '86',
   phoneNum: '13000000000',
@@ -169,27 +175,14 @@ logout().then(() => {
 });
 ```
 
-#### getVerifyCode
-```ts
-getVerifyCode({
-  country_code: '86',
-  telephone: '13000000000',
-}).then((res) => {
-  // boolean success and failure
-  console.log(res);
-})
-
-getVerifyCode({
-  email:'xxx@tuya.com',
-}).then((res) => {
-  // boolean success and failure
-  console.log(res);
-})
-```
-
 #### resetPassword
 
 ```js
+/**
+ * @param username
+ * @param oldPwd
+ * @param newPwd
+ */
 resetPassword('test', '123', '321').then((res) => {
   // Whether the boolean operation was successful
   console.log(res);
@@ -213,6 +206,9 @@ type Asset = {
   full_asset_name: string;
 };
 
+/**
+ * @param assetId: string
+ */
 getChildrenAssetsByAssetId('1').then((res) => {
   console.log(<Asset[]>res);
 })
@@ -221,6 +217,9 @@ getChildrenAssetsByAssetId('1').then((res) => {
 #### searchAssetByName
 
 ```ts
+/**
+ * @param assetName: string
+ */
 searchAssetByName('test').then((res) => {
   console.log(<Asset[]>res);
 })
@@ -229,6 +228,10 @@ searchAssetByName('test').then((res) => {
 #### addAsset
 
 ```ts
+/**
+ * @param assetName: string,
+ * @param parentAssetId: string = "",
+ */
 addAsset('newAsset', '1').then((res) => {
   // Add asset id
   console.log(<string>res)
@@ -244,7 +247,10 @@ type errorType = {
   code: number;
   httpCode: string;
 }
-
+/**
+ * @param assetId: string,
+ * @param assetName: string,
+ */
 editAsset('assetId','assetName').then((res) => {
   // Edit successfully
   console.log(<boolean>res)
@@ -264,6 +270,9 @@ type errorType = {
   httpCode: string;
 }
 
+/**
+ * @param assetId: string,
+ */
 removeAsset('assetId').then((res) => {
   // Successfully delete assets
   console.log(<boolean>res)
@@ -299,6 +308,9 @@ getEntireTree().then((res) => {
 
 #### getSubTree
 ```ts
+/**
+ * @param assetId: string,
+ */
 getSubTree('1').then((res) => {
   // Get the asset subtree with asset id 1
   console.log(<AssetDeep>res);
@@ -336,7 +348,11 @@ type DeviceInfo = {
   time_zone: string; // Time zone, for example: +08:00
   status: DeviceStatus[];
 }
-
+/**
+ * @param assetId: string,
+ * @param pageNum: number,
+ * @param pageSize: number,
+ */
 getDevicesInfoByAssetId('1', 1, 10).then((res) => {
   console.log(<DeviceInfo[]>res);
 })
@@ -364,7 +380,9 @@ type DeviceInfo = {
   time_zone: string; // Time zone, for example: +08:00
   status: DeviceStatus[];
 }
-
+/**
+ * @param deviceId: string,
+ */
 getDeviceInfoByDeviceId('1').then((res) => {
   console.log(<DeviceInfo>res)
 })
@@ -373,6 +391,9 @@ getDeviceInfoByDeviceId('1').then((res) => {
 #### removeDeviceById
 Delete device
 ```ts
+/**
+ * @param deviceId: string,
+ */
 removeDeviceById('12').then((res) => {
   console.log(<boolean>res);
 })
@@ -381,6 +402,10 @@ removeDeviceById('12').then((res) => {
 #### modifyDeviceInfo
 Modify device
 ```ts
+/**
+ * @param deviceId: string,
+ * @param devicename: string,
+ */
 modifyDeviceInfo('12','devicename').then((res) => {
   console.log(<boolean>res);
 })
@@ -392,6 +417,18 @@ controlling device
 For the detailed address of the standard instruction set, please refer to the official website description https://developer.tuya.com/cn/docs/iot/open-api/standard-function/datatypedescription?id=K9i5ql2jo7j1k
 
 ```ts
+type DeviceStatus = {
+  code: string; // 	设备状态名
+  value: Object; // 设备状态值
+  options?: string; // dp取值配置
+  editable?: boolean; // 是否可编辑
+  name?: string; // dp名称
+  type?: string; // dp类型
+};
+/**
+ * @param deviceId: string,
+ * @param deviceStatuses: DeviceStatus[],
+ */
 modifyDeviceDP('12', [{code:'', value: 2}]).then((res) => {
   console.log(<boolean>res);
 })
@@ -413,6 +450,9 @@ Get device information and DP
 This method is the aggregation result of getDeviceDP and getDeviceInfoByDeviceId
 Add dp to the status field of deviceInfo
 ```ts
+/**
+ * @param deviceId: string,
+ */
 getDeviceInfoWithDP('deviceId1').then((res) => {
   console.log(<DeviceInfo>res);
 })
@@ -583,20 +623,4 @@ npm run testServer
 Unit test start command
 ```bash
 npm run jest
-```
-
-## Demo Useage Instructions
-
-Jump to the example directory
-cd example
-yarn
-Wait for node_modules initialization to complete
-
-yarn run start
-So far, the demo service is available
-
-The back-end mock service starts
-Start a new terminal and jump to the project root directory
-```bash
-npm run testServer
 ```
