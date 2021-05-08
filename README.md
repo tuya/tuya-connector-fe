@@ -9,19 +9,19 @@ Tuya Connector FE SDK
 [English](README.md) | [中文版](./README_zh.md)
 
 
-index
+Index
 ---
 
-[Introduction](#Introduction)
-[Browser Compatible](#Browser-Compatible)
-[Install](#Install)
-[Example](#Example)
-[Function List](#Function-List)
-[Method Description](#Method-Description)
-[Error Handling](#Error-Handling)
-[Request Configuration](#Request-Configuration)
-[Test Case Usage](#Test-Case-Usage)
-[Demo Useage Instructions](#Demo-Useage-Instructions)
+- [Introduction](#Introduction)
+- [Browser Compatible](#Browser-Compatible)
+- [Install](#Install)
+- [Example](#Example)
+- [Function List](#Function-List)
+- [Method Description](#Method-Description)
+- [Error Handling](#Error-Handling)
+- [Request Configuration](#Request-Configuration)
+- [Test Case Usage](#Test-Case-Usage)
+- [Demo Useage Instructions](#Demo-Useage-Instructions)
 
 
 ## Introduction
@@ -95,27 +95,27 @@ setGlobalConfig({})
 
 ## Function List
 
--[login(userName, password[, config])](#login) login
--[multiLogin(loginParams[, config])](#multiLogin) aggregate login
--[logout()](#logout) log out
--[resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) change password
+- [login(userName, password[, config])](#login) login
+- [multiLogin(loginParams[, config])](#multiLogin) aggregate login
+- [logout()](#logout) log out
+- [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) change password
 
--[addAsset(assetName[, parentAssetId)[, config]]](#addAssets) add assets
--[editAsset(assetId, assetName[, config])](#editAssets) Edit assets
--[removeAsset(assetId[, config])](#removeAssets) remove specified assets
--[getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) Get the list of assets under the specified asset
--[searchAssetByName(assetName[, config])](#searchAssetByName) fuzzy asset query
--[getEntireTree([config])](#getEntireTree) Get the entire asset tree
--[getSubTree(assetId[, config])](#getSubTree) Get the subtree of the specified asset
+- [addAsset(assetName[, parentAssetId)[, config]]](#addAssets) add assets
+- [editAsset(assetId, assetName[, config])](#editAssets) Edit assets
+- [removeAsset(assetId[, config])](#removeAssets) remove specified assets
+- [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) Get the list of assets under the specified asset
+- [searchAssetByName(assetName[, config])](#searchAssetByName) fuzzy asset query
+- [getEntireTree([config])](#getEntireTree) Get the entire asset tree
+- [getSubTree(assetId[, config])](#getSubTree) Get the subtree of the specified asset
 
--[getDevicesInfoByAssetId(assetId, pageNum, pageSize[, config])](#getDevicesInfoByAssetId) Get device information under the specified asset
--[getDeviceInfoByDeviceId(deviceId[, config])](#getDeviceInfoByDeviceId) Get device information
--[removeDeviceById(deviceId[, config])](#removeDeviceById) remove device
--[modifyDeviceInfo(deviceId, name[,config])](#modifyDeviceInfo) modify device
--[modifyDeviceDP(deviceId, deviceStatuses[, config])](#modifyDeviceDP) control device dp
--[getDeviceDP(deviceId[,config])](#getDeviceDP) Get device instructions
--[getDeviceInfoWithDP(deviceId[, config])](#getDeviceInfoWithDP) Get device information and DP
--[getProjectInfo([config])](#getProjectInfo) Get the qrcode information of the bound device
+- [getDevicesInfoByAssetId(assetId, pageNum, pageSize[, config])](#getDevicesInfoByAssetId) Get device information under the specified asset
+- [getDeviceInfoByDeviceId(deviceId[, config])](#getDeviceInfoByDeviceId) Get device information
+- [removeDeviceById(deviceId[, config])](#removeDeviceById) remove device
+- [modifyDeviceInfo(deviceId, name[,config])](#modifyDeviceInfo) modify device
+- [modifyDeviceDP(deviceId, deviceStatuses[, config])](#modifyDeviceDP) control device dp
+- [getDeviceDP(deviceId[,config])](#getDeviceDP) Get device instructions
+- [getDeviceInfoWithDP(deviceId[, config])](#getDeviceInfoWithDP) Get device information and DP
+- [getProjectInfo([config])](#getProjectInfo) Get the qrcode information of the bound device
 
 ## Method Description
 #### login
@@ -129,15 +129,6 @@ type UserToken = {
 
 login('test','test').then((<UserToken>res) => {
   // Operation successfully returns UserToken
-  console.log(res)
-})
-
-login('test','test', {
-  baseURL:'http://localhost:8000',
-  method:'POST'
-  responseRaw: true,
-}).then((res) => {
-  // See Response Schema for specific format
   console.log(res)
 })
 

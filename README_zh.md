@@ -12,16 +12,16 @@ Tuya Connector FE SDK
 索引
 ---
 
-[简介](#简介)
-[浏览器兼容](#浏览器兼容)
-[安装](#安装)
-[例子](#例子)
-[功能列表](#功能列表)
-[方法说明](#方法说明)
-[错误处理](#错误处理)
-[请求配置](#请求配置)
-[测试用例使用](#测试用例使用)
-[demo说明](#demo说明)
+- [简介](#简介)
+- [浏览器兼容](#浏览器兼容)
+- [安装](#安装)
+- [例子](#例子)
+- [功能列表](#功能列表)
+- [方法说明](#方法说明)
+- [错误处理](#错误处理)
+- [请求配置](#请求配置)
+- [测试用例使用](#测试用例使用)
+- [demo说明](#demo说明)
 
 
 ## 简介
@@ -129,15 +129,6 @@ type UserToken = {
 
 login('test', 'test').then((<UserToken>res) => {
   // 操作成功返回UserToken
-  console.log(res)
-})
-
-login('test', 'test', {
-  baseURL: 'http://localhost:8000',
-  method: 'POST'
-  responseRaw: true,
-}).then((res) => {
-  // 具体格式详见Response Schema
   console.log(res)
 })
 
