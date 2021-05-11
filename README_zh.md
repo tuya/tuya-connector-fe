@@ -99,9 +99,9 @@ setGlobalConfig({})
 - [logout()](#logout) 登出
 - [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) 修改密码
 
-- [addAsset(assetName[, parentAssetId)[, config]]](#addAssets) 添加资产
-- [editAsset(assetId, assetName[, config])](#editAssets) 编辑资产
-- [removeAsset(assetId[, config])](#removeAssets) 移除指定资产
+- [addAsset(assetName[, parentAssetId)[, config]]](#addAsset) 添加资产
+- [editAsset(assetId, assetName[, config])](#editAsset) 编辑资产
+- [removeAsset(assetId[, config])](#removeAsset) 移除指定资产
 - [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) 获取指定资产下的资产列表
 - [searchAssetByName(assetName[, config])](#searchAssetByName) 资产模糊查询
 - [getEntireTree([config])](#getEntireTree) 获取整棵资产树
