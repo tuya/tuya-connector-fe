@@ -102,9 +102,9 @@ setGlobalConfig({})
 - [multiLogin(loginParams[, config])](#multiLogin) Log in with an email or phone number
 - [logout()](#logout) Log out
 - [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) Change password
-- [addAsset(assetName[, parentAssetId)[, config]]](#addAssets) Add assets
-- [editAsset(assetId, assetName[, config])](#editAssets) Edit assets
-- [removeAsset(assetId[, config])](#removeAssets) Remove a specified asset
+- [addAsset(assetName[, parentAssetId)[, config]]](#addAsset) Add an asset
+- [editAsset(assetId, assetName[, config])](#editAsset) Edit a specified asset
+- [removeAsset(assetId[, config])](#removeAsset) Remove a specified asset
 - [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) Get the list of assets by asset ID
 - [searchAssetByName(assetName[, config])](#searchAssetByName) Perform a fuzzy search for assets
 - [getEntireTree([config])](#getEntireTree) Get a specified asset tree
@@ -280,7 +280,7 @@ editAsset('assetId', 'assetName').then((res) => {
 
 #### removeAsset
 
-Remove an asset.
+Remove a specified asset.
 
 ```ts
 type errorType = {
