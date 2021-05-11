@@ -1,6 +1,6 @@
 <center><p align="center"><img src="https://images.tuyacn.com/rms-static/dc225080-25a5-11eb-8913-b53cc9e03c9c-1605267985800.png?tyName=tuya.png" width="36%" height="36%" /></p></center>
 
-[![tested with jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+[![Tested with Jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
 
 Tuya Connector FE SDK
 ===
@@ -9,36 +9,37 @@ Tuya Connector FE SDK
 [English](README.md) | [中文版](./README_zh.md)
 
 
-Index
+Contents
 ---
 
-- [Introduction](#Introduction)
-- [Browser Compatible](#Browser-Compatible)
-- [Install](#Install)
-- [Example](#Example)
-- [Function List](#Function-List)
-- [Method Description](#Method-Description)
-- [Error Handling](#Error-Handling)
-- [Request Configuration](#Request-Configuration)
-- [Test Case Usage](#Test-Case-Usage)
-- [Demo Useage Instructions](#Demo-Useage-Instructions)
+- [Overview](#Overview)
+- [Compatible browsers](#Compatible-browsers)
+- [Installation](#Installation)
+- [Examples](#Examples)
+- [Features](#Features)
+- [Methods](#Methods)
+- [Error handling](#Error-handling)
+- [Configure requests](#Configure-requests)
+- [Test cases](#Test-cases)
 
 
-## Introduction
+## Overview
 
-Tuya Connector FE SDK is a JavaScript package of Tuya SaaS Admin management platform data API
-Currently provides `Account login and logout`, `Change password`, `Asset management`, `Device management` related APIs
+Tuya Connector FE SDK encapsulates APIs in JavaScript that allow the Tuya SaaS Admin to manage data. 
+Currently, it provides APIs related to `account login and logout`, `password change`, `asset management`, and `device management`.
 
-Demo Project Image [https://hub.docker.com/r/iotportal/iot-suite](https://hub.docker.com/r/iotportal/iot-suite)
+For more information about the image of the demo project, see [https://hub.docker.com/r/iotportal/iot-suite](https://hub.docker.com/r/iotportal/iot-suite).
 
 
-## Browser compatibility
-![Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser -logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera] (https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Edge](https://raw.github.com/alrra/browser-logos/master /src/edge/edge_48x48.png) | ![IE](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png ) |
+## Compatible browsers
+
+| ![Google Chrome](https://raw.github.com/alrra/browser-logos/master/src/chrome/chrome_48x48.png) | ![Firefox](https://raw.github.com/alrra/browser-logos/master/src/firefox/firefox_48x48.png) | ![Safari](https://raw.github.com/alrra/browser-logos/master/src/safari/safari_48x48.png) | ![Opera](https://raw.github.com/alrra/browser-logos/master/src/opera/opera_48x48.png) | ![Microsoft Edge](https://raw.github.com/alrra/browser-logos/master/src/edge/edge_48x48.png) | ![Internet Explorer](https://raw.github.com/alrra/browser-logos/master/src/archive/internet-explorer_9-11/internet-explorer_9-11_48x48.png) |
 --- | --- | --- | --- | --- | --- |
-Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
+| Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
 
 
 ## Installation
+
 ```shell
 npm install @tuya/tuya-connector
 
@@ -48,97 +49,100 @@ yarn add @tuya/tuya-connector
 ```
 
 ## Examples
-```js
-import {version, apiService} from'@tuya/tuya-connector'
 
-// current sdk version number
+```js
+import {version, apiService} from '@tuya/tuya-connector'
+
+// Current SDK version number.
 console.log(version);
 
 const {multiLogin} = apiService;
 
 multiLogin({
-  userName:'test',
+  userName: 'test',
   pwd: '123123a',
 }).then((res) => {
   if (res) {
-    // login successful
+    // Login is successful.
     console.log('logged in');
   } else {
     console.error('fail to login');
   }
 }).catch((err) => {
-  // Login failed
+  // Failed to log in.
   console.error('login fail', err);
 })
 ```
 
-If you need a specific domain or port, you can initialize the relevant configuration before using it
+If a specific domain or port is required, you can initialize the relevant configuration before use.
+
 ```js
-import {configMethod} from'@tuya/tuya-connector'
+import {configMethod} from '@tuya/tuya-connector'
 
 const {initGlobalConfig, getGlobalConfig, setGlobalConfig} = configMethod;
 
-// Called when the project is initialized, global initialization is enough
-// See Request Config for specific configuration items
+// Called when the project is initialized. Global initialization is required only once.
+// See Request Config for specific configuration items.
 initGlobalConfig({
-  baseURL:'',
-  method:'GET',
-  onError: () => (), // global error callback
+  baseURL: '',
+  method: 'GET',
+  onError: () => {}, // Global error callback.
 })
 
-// Return the currently changed configuration, the default configuration of Request Config will not be carried
+// Returns the currently changed configuration. The default configuration of Request Config will not be carried.
 getGlobalConfig()
 
-// The specific configuration is the same as initGlobalConfig, and the bottom layer of initGlobalConfig is implemented using setGlobalConfig
+// The specific configuration is the same as initGlobalConfig, and the underlying layer of initGlobalConfig is implemented using setGlobalConfig.
 setGlobalConfig({})
 ```
 
-## Function List
+## Features
 
-- [login(userName, password[, config])](#login) login
-- [multiLogin(loginParams[, config])](#multiLogin) aggregate login
-- [logout()](#logout) log out
-- [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) change password
-
-- [addAsset(assetName[, parentAssetId)[, config]]](#addAssets) add assets
+- [login(userName, password[, config])](#login) Log in
+- [multiLogin(loginParams[, config])](#multiLogin) Log in with an email or phone number
+- [logout()](#logout) Log out
+- [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) Change password
+- [addAsset(assetName[, parentAssetId)[, config]]](#addAssets) Add assets
 - [editAsset(assetId, assetName[, config])](#editAssets) Edit assets
-- [removeAsset(assetId[, config])](#removeAssets) remove specified assets
-- [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) Get the list of assets under the specified asset
-- [searchAssetByName(assetName[, config])](#searchAssetByName) fuzzy asset query
-- [getEntireTree([config])](#getEntireTree) Get the entire asset tree
+- [removeAsset(assetId[, config])](#removeAssets) Remove a specified asset
+- [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) Get the list of assets by asset ID
+- [searchAssetByName(assetName[, config])](#searchAssetByName) Perform a fuzzy search for assets
+- [getEntireTree([config])](#getEntireTree) Get a specified asset tree
 - [getSubTree(assetId[, config])](#getSubTree) Get the subtree of the specified asset
-
 - [getDevicesInfoByAssetId(assetId, pageNum, pageSize[, config])](#getDevicesInfoByAssetId) Get device information under the specified asset
 - [getDeviceInfoByDeviceId(deviceId[, config])](#getDeviceInfoByDeviceId) Get device information
-- [removeDeviceById(deviceId[, config])](#removeDeviceById) remove device
-- [modifyDeviceInfo(deviceId, name[,config])](#modifyDeviceInfo) modify device
-- [modifyDeviceDP(deviceId, deviceStatuses[, config])](#modifyDeviceDP) control device dp
-- [getDeviceDP(deviceId[,config])](#getDeviceDP) Get device instructions
-- [getDeviceInfoWithDP(deviceId[, config])](#getDeviceInfoWithDP) Get device information and DP
-- [getProjectInfo([config])](#getProjectInfo) Get the qrcode information of the bound device
+- [removeDeviceById(deviceId[, config])](#removeDeviceById) Remove a device
+- [modifyDeviceInfo(deviceId, name[,config])](#modifyDeviceInfo) Modify a device
+- [modifyDeviceDP(deviceId, deviceStatuses[, config])](#modifyDeviceDP) Control a device
+- [getDeviceDP(deviceId[,config])](#getDeviceDP) Get  instructions for device control
+- [getDeviceInfoWithDP(deviceId[, config])](#getDeviceInfoWithDP) Get device information and data point (DP)
+- [getProjectInfo([config])](#getProjectInfo) Get the QR code to bind a device
 
-## Method Description
+## Methods
 #### login
+
+Log in with an email address.
 
 ```ts
 type UserToken = {
-  nick_name: string, // username
+  nick_name: string, // Username.
   token: string,
-  role_type: number, // role type, temporarily set to 1
+  role_type: number, // Role type, which is set to 1 now.
 }
 /**
  * @param username: string
  * @param pwd: string
  */
 
-login('test','test').then((<UserToken>res) => {
-  // Operation successfully returns UserToken
+login('test', 'test').then((<UserToken>res) => {
+  // Returns UserToken on success.
   console.log(res)
 })
-
 ```
 
 #### multiLogin
+
+Log in with an email address or mobile phone number.
 ```ts
 interface loginParams {
   userName?: string,
@@ -147,35 +151,40 @@ interface loginParams {
   phoneNum?: string,
 }
 
-// email
+// Log in with an email address.
 multiLogin({
-  userName:'xxx@email.com',
-  pwd:'test',
+  userName: 'xxx@email.com',
+  pwd: 'test',
 }).then((<UserToken>res) => {
-  // Operation successfully returns UserToken
+  // Returns UserToken on success.
   console.log(res)
 });
 
-// telephone
+// Log in with a mobile phone number.
 multiLogin({
   countryCode: '86',
   phoneNum: '13000000000',
-  pwd:'test',
+  pwd: 'test',
 }).then((<UserToken>res) => {
-  // Operation successfully returns UserToken
+  // Returns UserToken on success.
   console.log(res)
 })
 ```
 
 #### logout
+
+Log out of the current account.
+
 ```ts
 logout().then(() => {
-  // The server login status has been cleared, and the local status is maintained
+  // The login status in the server has been cleaned up, and you must maintain the local status.
   console.log('logout success');
 });
 ```
 
 #### resetPassword
+
+Change the password.
 
 ```js
 /**
@@ -184,20 +193,22 @@ logout().then(() => {
  * @param newPwd
  */
 resetPassword('test', '123', '321').then((res) => {
-  // Whether the boolean operation was successful
+  // Boolean type. It indicates whether the operation is successful.
   console.log(res);
 })
 
 resetPassword('test', '123', '321', {
-  baseURL:'http://localhost:8000',
-  method:'POST'
+  baseURL: 'http://localhost:8000',
+  method: 'POST'
 }).then((res) => {
-  // Whether the boolean operation was successful
+  // Boolean type. It indicates whether the operation is successful.
   console.log(res);
 })
 ```
 
 #### getChildrenAssetsByAssetId
+
+Get the list of first-level sub-assets.
 
 ```ts
 type Asset = {
@@ -216,6 +227,8 @@ getChildrenAssetsByAssetId('1').then((res) => {
 
 #### searchAssetByName
 
+Search for an asset.
+
 ```ts
 /**
  * @param assetName: string
@@ -227,18 +240,22 @@ searchAssetByName('test').then((res) => {
 
 #### addAsset
 
+Add an asset.
+
 ```ts
 /**
  * @param assetName: string,
  * @param parentAssetId: string = "",
  */
 addAsset('newAsset', '1').then((res) => {
-  // Add asset id
+  // The ID of the new asset.
   console.log(<string>res)
 })
 ```
 
 #### editAsset
+
+Edit the asset name.
 
 ```ts
 type errorType = {
@@ -247,20 +264,23 @@ type errorType = {
   code: number;
   httpCode: string;
 }
+
 /**
  * @param assetId: string,
  * @param assetName: string,
  */
-editAsset('assetId','assetName').then((res) => {
-  // Edit successfully
+editAsset('assetId', 'assetName').then((res) => {
+  // Edited the asset name successfully.
   console.log(<boolean>res)
 }).catch((err) => {
-  // Reason for failure
+  // Failure reason.
   console.error(<errorType>err)
 })
 ```
 
 #### removeAsset
+
+Remove an asset.
 
 ```ts
 type errorType = {
@@ -274,15 +294,17 @@ type errorType = {
  * @param assetId: string,
  */
 removeAsset('assetId').then((res) => {
-  // Successfully delete assets
+  // Deleted the asset successfully.
   console.log(<boolean>res)
 }).catch((err) => {
-  // Reason for failure
+  // Failure reason.
   console.error(<errorType>err)
 })
 ```
 
 #### getEntireTree
+
+Get the entire asset tree.
 
 ```ts
 type BaseAsset = {
@@ -301,18 +323,21 @@ type AssetDeep = Asset & {
 };
 
 getEntireTree().then((res) => {
-  // Get the asset tree successfully
+  // Got the asset tree successfully.
   console.log(<AssetDeep>res);
 })
 ```
 
 #### getSubTree
+
+Get the asset subtree.
+
 ```ts
 /**
  * @param assetId: string,
  */
 getSubTree('1').then((res) => {
-  // Get the asset subtree with asset id 1
+  // Get the asset subtree with asset ID of 1.
   console.log(<AssetDeep>res);
 });
 ```
@@ -321,39 +346,40 @@ getSubTree('1').then((res) => {
 
 ```ts
 type DeviceStatus = {
-  code: string; // Device status name
-  value: Object; // Device status value
-  options?: string; // dp value configuration
-  editable?: boolean; // Is it editable
-  name?: string; // dp name
-  type?: string; // dp type
+  code: string; //   Status name
+  value: Object; //Status value
+  options?: string; // DP value configuration
+  editable?: boolean; // Indicates whether it is editable
+  name?: string; // DP name
+  type?: string; // DP type
 };
 
 type DeviceInfo = {
-  id: string; // device number
-  name: string; // device name
-  uid: string; // User Id
-  local_key: string; // key
-  category: string; // product category
-  product_id: string; // Product Id
-  product_name: string; // product name
+  id: string; // Device number
+  name: string; // Device name
+  uid: string; // User ID
+  local_key: string; // Key
+  category: string; // Product category
+  product_id: string; // Product ID
+  product_name: string; // Product name
   sub: boolean; // Determine whether it is a sub-device
-  uuid: string; // unique identification of the device
-  online: boolean; // device online status
-  active_time: number; // Device activation time, timestamp, accurate to the second
-  icon: string; // device icon
-  ip: string; // Device IP
-  create_time: number; // Device creation time, timestamp, accurate to the second
-  update_time: number; // Device update time, timestamp, accurate to the second
-  time_zone: string; // Time zone, for example: +08:00
+  uuid: string; // The universally unique identifier of a device
+  online: boolean; // The online status of a device
+  active_time: number; // The timestamp when a device is activated, in seconds
+  icon: string; // The icon of a device
+  ip: string; // The IP address of a device
+  create_time: number; // The timestamp when a device is created, in seconds
+  update_time: number; // The timestamp when a device is updated, in seconds
+  time_zone: string; // Time zone, for example +08:00
   status: DeviceStatus[];
 }
+
 /**
  * @param assetId: string,
  * @param pageNum: number,
  * @param pageSize: number,
  */
-getDevicesInfoByAssetId('1', 1, 10).then((res) => {
+getDevicesInfoByAssetId('1', 1, 20).then((res) => {
   console.log(<DeviceInfo[]>res);
 })
 ```
@@ -362,24 +388,25 @@ getDevicesInfoByAssetId('1', 1, 10).then((res) => {
 
 ```ts
 type DeviceInfo = {
-  id: string; // device number
-  name: string; // device name
-  uid: string; // User Id
-  local_key: string; // key
-  category: string; // product category
-  product_id: string; // Product Id
-  product_name: string; // product name
+  id: string; // Device number
+  name: string; // Device name
+  uid: string; // User ID
+  local_key: string; // Key
+  category: string; // Product category
+  product_id: string; // Product ID
+  product_name: string; // Product name
   sub: boolean; // Determine whether it is a sub-device
-  uuid: string; // unique identification of the device
-  online: boolean; // device online status
-  active_time: number; // Device activation time, timestamp, accurate to the second
-  icon: string; // device icon
-  ip: string; // Device IP
-  create_time: number; // Device creation time, timestamp, accurate to the second
-  update_time: number; // Device update time, timestamp, accurate to the second
-  time_zone: string; // Time zone, for example: +08:00
+  uuid: string; // The universally unique identifier of a device
+  online: boolean; // The online status of a device
+  active_time: number; // The timestamp when a device is activated, in seconds
+  icon: string; // The icon of a device
+  ip: string; // The IP address of a device
+  create_time: number; // The timestamp when a device is created, in seconds
+  update_time: number; // The timestamp when a device is updated, in seconds
+  time_zone: string; // Time zone, for example +08:00
   status: DeviceStatus[];
 }
+
 /**
  * @param deviceId: string,
  */
@@ -389,7 +416,9 @@ getDeviceInfoByDeviceId('1').then((res) => {
 ```
 
 #### removeDeviceById
-Delete device
+
+Remove a device.
+
 ```ts
 /**
  * @param deviceId: string,
@@ -400,55 +429,65 @@ removeDeviceById('12').then((res) => {
 ```
 
 #### modifyDeviceInfo
-Modify device
+
+Modify the information about a device.
+
 ```ts
 /**
  * @param deviceId: string,
  * @param devicename: string,
  */
-modifyDeviceInfo('12','devicename').then((res) => {
+modifyDeviceInfo('12', 'devicename').then((res) => {
   console.log(<boolean>res);
 })
 ```
 
 #### modifyDeviceDP
-controlling device
 
-For the detailed address of the standard instruction set, please refer to the official website description https://developer.tuya.com/cn/docs/iot/open-api/standard-function/datatypedescription?id=K9i5ql2jo7j1k
+Control a device.
+
+For more information about standard instruction sets, see the [official website](https://developer.tuya.com/en/docs/iot/datatypedescription?id=K9i5ql2jo7j1k).
 
 ```ts
 type DeviceStatus = {
-  code: string; // 	设备状态名
-  value: Object; // 设备状态值
-  options?: string; // dp取值配置
-  editable?: boolean; // 是否可编辑
-  name?: string; // dp名称
-  type?: string; // dp类型
+  code: string; //   Status name
+  value: Object; //Status value
+  options?: string; // DP value configuration
+  editable?: boolean; // Indicates whether it is editable
+  name?: string; // DP name
+  type?: string; // DP type
 };
 /**
  * @param deviceId: string,
  * @param deviceStatuses: DeviceStatus[],
  */
-modifyDeviceDP('12', [{code:'', value: 2}]).then((res) => {
+modifyDeviceDP('12', [{code: '', value: 2}]).then((res) => {
   console.log(<boolean>res);
 })
 ```
 
 #### getDeviceDP
-Get device instructions
 
-For the detailed address of the standard instruction set, please refer to the official website description https://developer.tuya.com/cn/docs/iot/open-api/standard-function/datatypedescription?id=K9i5ql2jo7j1k
+Get the instructions.
+
+For more information about standard instruction sets, see the [official website](https://developer.tuya.com/en/docs/iot/datatypedescription?id=K9i5ql2jo7j1k).
 
 ```ts
+/**
+ * @param deviceId: string,
+ */
 getDeviceDP('12').then((res) => {
   console.log(res)
 })
 ```
 
 #### getDeviceInfoWithDP
-Get device information and DP
-This method is the aggregation result of getDeviceDP and getDeviceInfoByDeviceId
-Add dp to the status field of deviceInfo
+
+Get the device information and DP.
+
+This method is the aggregation result of `getDeviceDP` and `getDeviceInfoByDeviceId`. Specify the DP in the `status` field of `deviceInfo`.
+
+ 
 ```ts
 /**
  * @param deviceId: string,
@@ -457,32 +496,32 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
   console.log(<DeviceInfo>res);
 })
 
-// Reference sample
+// Sample
 {
-  id:'deviceId1',
-  name:'deviceId1',
-  uid:'uid1',
-  local_key:'local_key',
-  category:'category',
-  product_id:'product_id',
-  product_name:'product_name',
+  id: 'deviceId1',
+  name: 'deviceId1',
+  uid: 'uid1',
+  local_key: 'local_key',
+  category: 'category',
+  product_id: 'product_id',
+  product_name: 'product_name',
   sub: true,
-  uuid:'uuid',
+  uuid: 'uuid',
   online: true,
   active_time: 1615175477,
-  icon:'icon',
+  icon: 'icon',
   ip: '127.0.0.1',
   create_time: 1615175477,
   update_time: 1615175477,
-  time_zone:'+08:00',
+  time_zone: '+08:00',
   status: [
     {
       code: "va_temperature",
       value: 243,
       editable: false,
       type: "Integer",
-      options: "{\"unit\":\"℃\",\"min\":-399,\"max\":800,\"scale\":1,\"step\":1}" ,
-      name:'',
+      options: "{\"unit\":\"℃\",\"min\":-399,\"max\":800,\"scale\":1,\"step\":1}",
+      name: '',
     },
     {
       code: "va_humidity",
@@ -490,12 +529,12 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       editable: false,
       type: "Integer",
       options: "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}",
-      name:'',
+      name: '',
     },
     {
       code: "battery_percentage",
       value: 40,
-      name:'',
+      name: '',
       editable: false,
       type: "Integer",
       options: "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}",
@@ -506,13 +545,13 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       editable: false,
       type: "Boolean",
       options: "{}",
-      name:'',
+      name: '',
     },
     {
       code: "temp_unit_convert",
       value: "c",
       editable: true,
-      name: "Temperature Scale Switching",
+      name: "Temperature unit conversion",
       type: "Enum",
       options: "{\"range\":[\"c\",\"f\"]}",
     },
@@ -520,7 +559,7 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       code: "maxtemp_set",
       value: 535,
       editable: true,
-      name: "Temperature upper limit setting",
+      name: "Maximum temperature",
       type: "Integer",
       options: "{\"unit\":\"℃\",\"min\":-399,\"max\":800,\"scale\":1,\"step\":1}",
     },
@@ -528,22 +567,22 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       code: "minitemp_set",
       value: 0,
       editable: true,
-      name: "Temperature lower limit setting",
+      name: "Minimum temperature",
       type: "Integer",
-      options: "{\"unit\":\"℃\",\"min\":-399,\"max\":800,\"scale\":1,\"step\":1}" ,
+      options: "{\"unit\":\"℃\",\"min\":-399,\"max\":800,\"scale\":1,\"step\":1}",
     },
     {
       code: "maxhum_set",
       value: 95,
       editable: true,
-      name: "Humidity upper limit setting",
+      name: "Maximum humidity",
       type: "Integer",
       options: "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
     },
     {
       code: "minihum_set",
       value: 10,
-      name: "Humidity lower limit setting",
+      name: "Minimum humidity",
       editable: true,
       type: "Integer",
       options: "{\"unit\":\"%\",\"min\":0,\"max\":100,\"scale\":0,\"step\":1}"
@@ -554,7 +593,7 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       type: "Enum",
       editable: false,
       options: "{\"range\":[\"loweralarm\",\"upperalarm\",\"cancel\"]}",
-      name:'',
+      name: '',
     },
     {
       code: "hum_alarm",
@@ -562,13 +601,15 @@ getDeviceInfoWithDP('deviceId1').then((res) => {
       type: "Enum",
       editable: false,
       options: "{\"range\":[\"loweralarm\",\"upperalarm\",\"cancel\"]}",
-      name:'',
+      name: '',
     }
   ]
 }
 ```
 
 #### getProjectInfo
+
+Get the QR code to bind a device.
 
 ```ts
 type ProjectInfo = {
@@ -577,29 +618,31 @@ type ProjectInfo = {
 };
 
 getProjectInfo().then((res) => {
-  // Get the two-dimensional information of the bound device successfully
+  // Got the QR code successfully.
   console.log(<ProjectInfo>res);
 })
 ```
 
 
----------
 
-## Error Handling
-When an http exception occurs, apiService will catch the exception uniformly, please use promise catch to get the relevant exception message
+## Error handling
+
+When an HTTP exception occurs, `apiService` will get the exception. You can use `promise catch` to get the relevant exception message.
+
 ```ts
 apiService.getDeviceInfoByDeviceId('1').catch(({msg, code}) => {
   console.error(msg);
 })
 ```
-or
-Register the global error handling method in initConfig
+
+Alternatively, you can register the global error handling methods in `initConfig`.
+ 
 ```ts
 type ApiError = {
   httpCode: number, // http code
   code: number,
   msg: string,
-  apiMethodName: string, // call method name
+  apiMethodName: string, // Call method name
 }
 
 initConfig({
@@ -607,20 +650,23 @@ initConfig({
 })
 ```
 
-## Request Configuration
-For details of request configuration, please refer to [Axios request config](https://github.com/axios/axios#request-config)
+## Configure requests
+
+For more information about request configuration, see [Axios request config.](https://github.com/axios/axios#request-config)
 
 
 
-## Test case Useage
+## Test cases
 
-Pre-preparation, start the mock server
-Default monitoring 7001
+As a preparation, start the mock server.
+
+Listen to 7001 by default.
+
 ```bash
 npm run testServer
 ```
 
-Unit test start command
+Start the unit test.
 ```bash
 npm run jest
 ```
