@@ -39,16 +39,16 @@ Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | Latest ✔ | 11 ✔ |
 
 ## 安装
 ```shell
-npm install @tuya/tuya-connector
+npm install @tuya/connector
 
 or
 
-yarn add @tuya/tuya-connector
+yarn add @tuya/connector
 ```
 
 ## 例子
 ```js
-import {version, apiService} from '@tuya/tuya-connector'
+import {version, apiService} from '@tuya/connector'
 
 // 当前sdk版本号 
 console.log(version);
@@ -73,7 +73,7 @@ multiLogin({
 
 如需有特定domain 或者 port，可在使用前，初始化一下相关配置
 ```js
-import {configMethod} from '@tuya/tuya-connector'
+import {configMethod} from '@tuya/connector'
 
 const {initGlobalConfig, getGlobalConfig, setGlobalConfig} = configMethod;
 

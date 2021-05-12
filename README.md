@@ -41,17 +41,17 @@ For more information about the image of the demo project, see [https://hub.docke
 ## Installation
 
 ```shell
-npm install @tuya/tuya-connector
+npm install @tuya/connector
 
 or
 
-yarn add @tuya/tuya-connector
+yarn add @tuya/connector
 ```
 
 ## Examples
 
 ```js
-import {version, apiService} from '@tuya/tuya-connector'
+import {version, apiService} from '@tuya/connector'
 
 // Current SDK version number.
 console.log(version);
@@ -77,7 +77,7 @@ multiLogin({
 If a specific domain or port is required, you can initialize the relevant configuration before use.
 
 ```js
-import {configMethod} from '@tuya/tuya-connector'
+import {configMethod} from '@tuya/connector'
 
 const {initGlobalConfig, getGlobalConfig, setGlobalConfig} = configMethod;
 

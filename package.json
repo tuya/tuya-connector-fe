@@ -1,5 +1,5 @@
 {
-  "name": "@tuya/tuya-connector",
+  "name": "@tuya/connector",
   "version": "1.0.0",
   "description": "A library for communicating with Tuya SaaS admin service, based on Axios.",
   "main": "dist/index.js",
