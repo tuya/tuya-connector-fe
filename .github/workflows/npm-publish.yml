@@ -2,8 +2,6 @@ name: npm-publish
 
 on:
   push:
-    branches:
-      - master # Change this to your default branch
     tags:
       - 'v*.*.*'
 
@@ -16,4 +14,3 @@ jobs:
       - uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
-          
