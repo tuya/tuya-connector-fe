@@ -9,6 +9,9 @@
     "test": "jest",
     "testServer": "node test/mockServer/index.js"
   },
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "iot",
     "saas",
