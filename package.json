@@ -20,6 +20,10 @@
     "tuya"
   ],
   "author": "chouyouf@gmail.com",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/tuya/tuya-connector-fe.git"
+  },
   "license": "MIT",
   "devDependencies": {
     "@babel/core": "^7.13.8",
