@@ -4,13 +4,30 @@ on:
   push:
     tags:
       - 'v*.*.*'
+      - 'v*.*.*-beta'
+      - 'v*.*.*-alpha'
 
 jobs:
   npm-publish:
-    name: npm-publish
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
-      - uses: JS-DevTools/npm-publish@v1
+      - name: publish with beta tag
+        if: endsWith(github.ref, '-beta')
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
+          tag: "beta"
+      - name: publish with alpha tag
+        if: endsWith(github.ref, '-alpha')
+        uses: JS-DevTools/npm-publish@v1
+        with:
+          token: ${{ secrets.NPM_AUTH_TOKEN }}
+          tag: "alpha"
+      - name: publish with latest tag
+        if: | 
+          !endsWith(github.ref, '-beta') &&
+          !endsWith(github.ref, '-alpha')
+        uses: JS-DevTools/npm-publish@v1
         with:
           token: ${{ secrets.NPM_AUTH_TOKEN }}
