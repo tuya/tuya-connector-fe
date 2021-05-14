@@ -125,53 +125,73 @@ export const logout = (opts: IOptions = { data: {} }) => {
     });
 };
 
+export interface forgetPwdParams {
+  code: string;
+  newPassword: string;
+}
+
+export interface emailForgetPwdParams extends forgetPwdParams {
+  email: string;
+}
+
+export interface phoneForgetPwdParams extends forgetPwdParams {
+  countryCode: string;
+  phone: string;
+}
+
 /**
  * 忘记密码，用户密码重置
  */
-// export const forgetPassword = (username: string, newPwd: string, code: string, opts: IOptions = {data: {}}) => {
-//   return <Promise<boolean | errorType>>createService({
-//     apiMethodName: 'resetPasswordV2',
-//     url: '/user/password/reset',
-//     method: 'PUT',
-//     ...opts,
-//     data: {
-//       ...opts.data,
-//       user_name: username,
-//       new_password: sha256(newPwd),
-//       verification_code: code,
-//     },
-//   }).then(() => {
-//     return true;
-//   }).catch((err) => {
-//     return err;
-//   });
-// };
+export const forgetPassword = ({
+  code,
+  newPassword,
+  ...rest
+}: emailForgetPwdParams | phoneForgetPwdParams, opts: IOptions = {data: {}}) => {
+  return <Promise<boolean | errorType>>createService({
+    apiMethodName: 'forgetPassword',
+    url: '/user/password/reset',
+    method: 'POST',
+    ...opts,
+    data: {
+      ...opts.data,
+      newPassword: sha256(newPassword),
+      code,
+      ...rest,
+    },
+  }).then(() => {
+    return true;
+  }).catch((err) => {
+    return err;
+  });
+};
 
 export interface verifyCodeParamsPhone {
-  country_code: string,
-  telephone: string,
+  language: string,
+  countryCode: string,
+  phone: string,
 }
 
 export interface verifyCodeParamsEmail {
   email: string,
+  language: string,
 }
 
 /**
  * 获取验证码
  */
-// export const getVerifyCode = (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts: IOptions = {data: {}}) => {
-//   return <Promise<boolean | errorType>>createService({
-//     apiMethodName: 'getVerifyCode',
-//     url: '/verification-code',
-//     method: 'GET',
-//     ...opts,
-//     params: {
-//       ...opts.data,
-//       ...params,
-//     },
-//   }).then(() => {
-//     return true;
-//   }).catch((err) => {
-//     return err;
-//   });
-// };
+export const getVerifyCode = (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts: IOptions = {data: {}}) => {
+  return <Promise<boolean | errorType>>createService({
+    apiMethodName: 'getVerifyCode',
+    url: '/user/password/reset/captcha',
+    method: 'POST',
+    ...opts,
+    data: {
+      ...opts.data,
+      ...params,
+    },
+  }).then(() => {
+    return true;
+  }).catch((err) => {
+    return err;
+  });
+};
