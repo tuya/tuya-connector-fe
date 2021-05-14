@@ -1,12 +1,21 @@
 <center><p align="center"><img src="https://images.tuyacn.com/rms-static/dc225080-25a5-11eb-8913-b53cc9e03c9c-1605267985800.png?tyName=tuya.png" width="36%" height="36%" /></p></center>
 
-[![Tested with Jest](https://img.shields.io/badge/tested_with-jest-99424f.svg)](https://github.com/facebook/jest)
+<center><p align="center">
+  <a href="https://www.npmjs.com/package/@tuya/connector" target="_blank">
+    <img src="https://img.shields.io/npm/v/@tuya/connector/latest.svg" />
+  </a>
+
+  <img src="https://img.shields.io/github/license/tuya/tuya-connector-fe.svg" />
+
+  <img src="https://img.shields.io/badge/tested_with-jest-99424f.svg" />
+</p>
+</center>
 
 Tuya Connector FE SDK
 ===
 
 
-[English](README.md) | [中文版](./README_zh.md)
+[English](README.md) | [中文版](README_zh.md)
 
 
 Contents
@@ -670,3 +679,8 @@ Start the unit test.
 ```bash
 npm run jest
 ```
+
+## License
+
+[MIT License](./LICENSE)
+
