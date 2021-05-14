@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.logout = exports.resetPassword = exports.multiLogin = exports.login = void 0;
+exports.getVerifyCode = exports.forgetPassword = exports.logout = exports.resetPassword = exports.multiLogin = exports.login = void 0;
 var tslib_1 = require("tslib");
 var js_sha256_1 = require("js-sha256");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
@@ -71,21 +71,27 @@ var logout = function (opts) {
 };
 exports.logout = logout;
 /**
+ * 忘记密码，用户密码重置
+ */
+var forgetPassword = function (_a, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    var code = _a.code, newPassword = _a.newPassword, rest = tslib_1.__rest(_a, ["code", "newPassword"]);
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'forgetPassword', url: '/user/password/reset', method: 'POST' }, opts), { data: tslib_1.__assign(tslib_1.__assign(tslib_1.__assign({}, opts.data), { newPassword: js_sha256_1.sha256(newPassword), code: code }), rest) })).then(function () {
+        return true;
+    }).catch(function (err) {
+        return err;
+    });
+};
+exports.forgetPassword = forgetPassword;
+/**
  * 获取验证码
  */
-// export const getVerifyCode = (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts: IOptions = {data: {}}) => {
-//   return <Promise<boolean | errorType>>createService({
-//     apiMethodName: 'getVerifyCode',
-//     url: '/verification-code',
-//     method: 'GET',
-//     ...opts,
-//     params: {
-//       ...opts.data,
-//       ...params,
-//     },
-//   }).then(() => {
-//     return true;
-//   }).catch((err) => {
-//     return err;
-//   });
-// };
+var getVerifyCode = function (params, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'getVerifyCode', url: '/user/password/reset/captcha', method: 'POST' }, opts), { data: tslib_1.__assign(tslib_1.__assign({}, opts.data), params) })).then(function () {
+        return true;
+    }).catch(function (err) {
+        return err;
+    });
+};
+exports.getVerifyCode = getVerifyCode;

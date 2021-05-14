@@ -33,16 +33,31 @@ export declare const resetPassword: (username: string, oldPwd: string, newPwd: s
  * @returns
  */
 export declare const logout: (opts?: IOptions) => Promise<boolean | errorType>;
+export interface forgetPwdParams {
+    code: string;
+    newPassword: string;
+}
+export interface emailForgetPwdParams extends forgetPwdParams {
+    email: string;
+}
+export interface phoneForgetPwdParams extends forgetPwdParams {
+    countryCode: string;
+    phone: string;
+}
 /**
  * 忘记密码，用户密码重置
  */
+export declare const forgetPassword: ({ code, newPassword, ...rest }: emailForgetPwdParams | phoneForgetPwdParams, opts?: IOptions) => Promise<boolean | errorType>;
 export interface verifyCodeParamsPhone {
-    country_code: string;
-    telephone: string;
+    language: string;
+    countryCode: string;
+    phone: string;
 }
 export interface verifyCodeParamsEmail {
     email: string;
+    language: string;
 }
 /**
  * 获取验证码
  */
+export declare const getVerifyCode: (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts?: IOptions) => Promise<boolean | errorType>;
