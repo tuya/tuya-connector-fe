@@ -9,7 +9,7 @@
 
   <img src="https://img.shields.io/badge/tested_with-jest-99424f.svg" />
 </p>
-</center>1`
+</center>
 
 Tuya Connector FE SDK
 ===
