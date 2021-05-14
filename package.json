@@ -1,6 +1,6 @@
 {
   "name": "@tuya/connector",
-  "version": "1.0.0",
+  "version": "1.0.1-beta",
   "description": "A library for communicating with Tuya SaaS admin service, based on Axios.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
