@@ -5,6 +5,7 @@ export type BaseAsset = {
   asset_id: string;
   asset_name: string;
   full_asset_name: string;
+  is_authorized: boolean;
 };
 
 export type Asset = BaseAsset & {
@@ -134,5 +135,25 @@ export const getEntireTree = (opts: IOptions = { data: {} }) => {
       return res.subAssets;
     }
     return [];
+  });
+};
+
+/**
+ * 获取一级子节点，加速版
+ * @param assetId 
+ * @param opts 
+ * @returns 
+ */
+export const getSubTreeFast = (assetId: string, opts: IOptions = { data: {} }) => {
+  return <Promise<Asset[]>>createService({
+    apiMethodName: "getSubTreeFast",
+    url: `/assets/tree-fast/${assetId}`,
+    method: "GET",
+    ...opts,
+  }).then((res) => {
+    if (res) {
+      return <Asset[]>res;
+    }
+    return {};
   });
 };

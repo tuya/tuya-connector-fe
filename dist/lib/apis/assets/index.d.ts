@@ -3,6 +3,7 @@ export declare type BaseAsset = {
     asset_id: string;
     asset_name: string;
     full_asset_name: string;
+    is_authorized: boolean;
 };
 export declare type Asset = BaseAsset & {
     child_asset_count: number;
@@ -18,3 +19,10 @@ export declare const getChildrenAssetsByAssetId: (assetId: string, opts?: IOptio
 export declare const searchAssetByName: (assetName: string, opts?: IOptions) => Promise<Asset[]>;
 export declare const getSubTree: (assetId: string, opts?: IOptions) => Promise<AssetDeep>;
 export declare const getEntireTree: (opts?: IOptions) => Promise<AssetDeep[]>;
+/**
+ * 获取一级子节点，加速版
+ * @param assetId
+ * @param opts
+ * @returns
+ */
+export declare const getSubTreeFast: (assetId: string, opts?: IOptions) => Promise<Asset[]>;
