@@ -131,7 +131,7 @@ export interface forgetPwdParams {
 }
 
 export interface emailForgetPwdParams extends forgetPwdParams {
-  email: string;
+  mail: string;
 }
 
 export interface phoneForgetPwdParams extends forgetPwdParams {
@@ -172,7 +172,7 @@ export interface verifyCodeParamsPhone {
 }
 
 export interface verifyCodeParamsEmail {
-  email: string,
+  mail: string,
   language: string,
 }
 

@@ -38,7 +38,7 @@ export interface forgetPwdParams {
     newPassword: string;
 }
 export interface emailForgetPwdParams extends forgetPwdParams {
-    email: string;
+    mail: string;
 }
 export interface phoneForgetPwdParams extends forgetPwdParams {
     countryCode: string;
@@ -54,7 +54,7 @@ export interface verifyCodeParamsPhone {
     phone: string;
 }
 export interface verifyCodeParamsEmail {
-    email: string;
+    mail: string;
     language: string;
 }
 /**
