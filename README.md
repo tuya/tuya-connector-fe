@@ -111,6 +111,9 @@ setGlobalConfig({})
 - [multiLogin(loginParams[, config])](#multiLogin) Log in with an email or phone number
 - [logout()](#logout) Log out
 - [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) Change password
+- [forgetPassword(params[, config])](#forgetPassword) Reset password
+- [getVerifyCode(params[, config])](#getVerifyCode) Get verification code
+
 - [addAsset(assetName[, parentAssetId)[, config]]](#addAsset) Add an asset
 - [editAsset(assetId, assetName[, config])](#editAsset) Edit a specified asset
 - [removeAsset(assetId[, config])](#removeAsset) Remove a specified asset
@@ -213,6 +216,82 @@ resetPassword('test', '123', '321', {
   // Boolean type. It indicates whether the operation is successful.
   console.log(res);
 })
+```
+
+#### forgetPassword
+
+reset password
+```ts
+interface forgetPwdParams {
+  code: string;
+  newPassword: string;
+}
+
+interface emailForgetPwdParams extends forgetPwdParams {
+  mail: string;
+}
+
+interface phoneForgetPwdParams extends forgetPwdParams {
+  countryCode: string;
+  phone: string;
+}
+
+const params1 = {
+  countryCode: '86',
+  phone: '13100001111',
+  code: '123456',
+  newPassword: 'abcdefg123',
+} : phoneForgetPwdParams;
+
+forgetPassword(params1).then((res) => {
+  console.log(<boolean>res);
+});
+
+const params1 = {
+  mail: 'xx@tuya.com',
+  code: '123456',
+  newPassword: 'abcdefg123',
+} : emailForgetPwdParams;
+forgetPassword(params1).then((res) => {
+  console.log(<boolean>res);
+});
+```
+
+#### getVerifyCode
+
+get verification code
+
+```ts
+interface verifyCodeParamsPhone {
+  language: string,
+  countryCode: string,
+  phone: string,
+}
+
+interface verifyCodeParamsEmail {
+  mail: string,
+  language: string,
+}
+
+const params1 = {
+  countryCode: '86',
+  phone: '13100001111',
+  language: 'zh-CN',
+}: verifyCodeParamsPhone;
+
+getVerifyCode(params1).then((res) => {
+  console.log(<boolean>res);
+});
+
+const params2 = {
+  mail: 'xx@tuya.com',
+  language: 'en-US',
+}: verifyCodeParamsEmail;
+
+getVerifyCode(params2).then((res) => {
+  console.log(<boolean>res);
+});
+
 ```
 
 #### getChildrenAssetsByAssetId

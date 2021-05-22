@@ -59,5 +59,6 @@ export interface verifyCodeParamsEmail {
 }
 /**
  * 获取验证码
+ * @params params[verifyCodeParamsEmail | verifyCodeParamsPhone]
  */
 export declare const getVerifyCode: (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts?: IOptions) => Promise<boolean | errorType>;

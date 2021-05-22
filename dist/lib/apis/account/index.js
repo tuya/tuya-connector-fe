@@ -85,6 +85,7 @@ var forgetPassword = function (_a, opts) {
 exports.forgetPassword = forgetPassword;
 /**
  * 获取验证码
+ * @params params[verifyCodeParamsEmail | verifyCodeParamsPhone]
  */
 var getVerifyCode = function (params, opts) {
     if (opts === void 0) { opts = { data: {} }; }

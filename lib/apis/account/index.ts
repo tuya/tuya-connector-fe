@@ -178,6 +178,7 @@ export interface verifyCodeParamsEmail {
 
 /**
  * 获取验证码
+ * @params params[verifyCodeParamsEmail | verifyCodeParamsPhone]
  */
 export const getVerifyCode = (params: verifyCodeParamsEmail | verifyCodeParamsPhone, opts: IOptions = {data: {}}) => {
   return <Promise<boolean | errorType>>createService({

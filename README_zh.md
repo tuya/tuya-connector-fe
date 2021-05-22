@@ -108,6 +108,8 @@ setGlobalConfig({})
 - [multiLogin(loginParams[, config])](#multiLogin) 聚合登录
 - [logout()](#logout) 登出
 - [resetPassword(userName, currentPwd, newPwd[, config])](#resetPassword) 修改密码
+- [forgetPassword(params[, config])](#forgetPassword) 重置密码
+- [getVerifyCode(params[, config])](#getVerifyCode) 获取验证码
 
 - [addAsset(assetName[, parentAssetId)[, config]]](#addAsset) 添加资产
 - [editAsset(assetId, assetName[, config])](#editAsset) 编辑资产
@@ -206,6 +208,79 @@ resetPassword('test', '123', '321', {
   // boolean 操作是否成功
   console.log(res);
 })
+```
+
+#### forgetPassword
+重置密码
+```ts
+interface forgetPwdParams {
+  code: string;
+  newPassword: string;
+}
+
+interface emailForgetPwdParams extends forgetPwdParams {
+  mail: string;
+}
+
+interface phoneForgetPwdParams extends forgetPwdParams {
+  countryCode: string;
+  phone: string;
+}
+
+const params1 = {
+  countryCode: '86',
+  phone: '13100001111',
+  code: '123456',
+  newPassword: 'abcdefg123',
+} : phoneForgetPwdParams;
+
+forgetPassword(params1).then((res) => {
+  console.log(<boolean>res);
+});
+
+const params1 = {
+  mail: 'xx@tuya.com',
+  code: '123456',
+  newPassword: 'abcdefg123',
+} : emailForgetPwdParams;
+forgetPassword(params1).then((res) => {
+  console.log(<boolean>res);
+});
+```
+
+#### getVerifyCode
+获取验证码
+```ts
+interface verifyCodeParamsPhone {
+  language: string,
+  countryCode: string,
+  phone: string,
+}
+
+interface verifyCodeParamsEmail {
+  mail: string,
+  language: string,
+}
+
+const params1 = {
+  countryCode: '86',
+  phone: '13100001111',
+  language: 'zh-CN',
+}: verifyCodeParamsPhone;
+
+getVerifyCode(params1).then((res) => {
+  console.log(<boolean>res);
+});
+
+const params2 = {
+  mail: 'xx@tuya.com',
+  language: 'en-US',
+}: verifyCodeParamsEmail;
+
+getVerifyCode(params2).then((res) => {
+  console.log(<boolean>res);
+});
+
 ```
 
 #### getChildrenAssetsByAssetId
