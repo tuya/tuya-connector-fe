@@ -10,6 +10,7 @@
     "testServer": "node test/mockServer/index.js"
   },
   "publishConfig": {
+    "registry": "https://registry.npmjs.org",
     "access": "public"
   },
   "keywords": [
