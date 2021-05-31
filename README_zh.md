@@ -1,4 +1,4 @@
-<center><p align="center"><img src="./tuya_logo.png" width="36%" height="36%" /></p></center>
+<center><p align="center"><img src="./tuya_logo.png" width="28%" height="28%" /></p></center>
 
 
 <center><p align="center">
