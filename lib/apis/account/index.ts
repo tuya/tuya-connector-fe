@@ -196,36 +196,3 @@ export const getVerifyCode = (params: verifyCodeParamsEmail | verifyCodeParamsPh
     return err;
   });
 };
-
-export enum permissionType {
-  page = 'page',
-  menu = 'emnu',
-  api = 'api',
-}
-
-export interface userPermission {
-  id: string;
-  code: string;
-  name: string;
-  type: permissionType;
-}
-
-/**
- * 获取用户权限列表
- */
-export const getPermissionListByAccount = (uid: string, opts: IOptions = {data: {}}) => {
-  return <Promise<boolean | errorType>>createService({
-    apiMethodName: 'getPermissionListByAccount',
-    url: `/users/${uid}/permissions`,
-    method: 'GET',
-    ...opts,
-    params: {
-      ...opts.data,
-      uid,
-    },
-  }).then((res) => {
-
-  });
-};
-
-
