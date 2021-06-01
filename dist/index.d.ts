@@ -1,6 +1,6 @@
-import * as configMethod from './lib/common/config';
-import { IOptions } from './lib/common/types';
-import * as apiService from './lib/apis';
+import * as configMethod from "./lib/common/config";
+import { IOptions } from "./lib/common/types";
+import * as apiService from "./lib/apis";
 declare const version: string;
 declare const apiClient: (config: IOptions) => Promise<any>;
 declare const coreSdk: {
@@ -9,7 +9,7 @@ declare const coreSdk: {
     configMethod: typeof configMethod;
     apiService: typeof apiService;
 };
-export type { Asset, BaseAsset, AssetDeep, DeviceInfo, DeviceStatus, DeviceInfoList, UserToken, ProjectInfo, verifyCodeParamsEmail, verifyCodeParamsPhone, loginParams } from './lib/apis';
-export type { errorType } from './lib/common/types';
-export { apiService, configMethod, version, apiClient, };
+export type { Asset, BaseAsset, AssetDeep, DeviceInfo, DeviceStatus, DeviceInfoList, UserToken, ProjectInfo, verifyCodeParamsEmail, verifyCodeParamsPhone, loginParams, getAccountListParams, userListResp, user, addAccountParams, role, roleListResp, RoleType, addRoleParams, editRoleNameParams, grantPermissionByRoleParams, permission, PermissionType, alarmParams, alarmItem, alarmResp, } from "./lib/apis";
+export type { errorType } from "./lib/common/types";
+export { apiService, configMethod, version, apiClient };
 export default coreSdk;
