@@ -12,3 +12,9 @@ export interface IOptions extends AxiosRequestConfig {
   apiMethodName?: string, // 调用方法名
   [key: string]: any,
 }
+
+export interface paginationType {
+  total: number;
+  pageNo: number;
+  pageSize: number;
+};
