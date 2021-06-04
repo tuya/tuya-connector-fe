@@ -5,7 +5,7 @@ export type {
   loginParams,
 } from "./account";
 export * from "./account";
-export type { Asset, AssetDeep, BaseAsset } from "./assets";
+export type { Asset, AssetDeep, BaseAsset, AdminAsset } from "./assets";
 export * from "./assets";
 export type {
   DeviceInfo,

@@ -44,6 +44,7 @@ export type {
   alarmParams,
   alarmItem,
   alarmResp,
+  AdminAsset,
 } from "./lib/apis";
 export type { errorType } from "./lib/common/types";
 

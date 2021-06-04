@@ -45,7 +45,7 @@ export const getRoleList = (pageNo: number = 20, pageSize: number = 1, opts: IOp
 };
 
 // todo 待测试
-export const getEntireRoles = async (opts: IOptions) => {
+export const getEntireRoles = async (opts: IOptions={data: {}}) => {
   const result: role[] = [];
   let pageSize = 1;
   const loopFetchRoleList = () => {
@@ -244,6 +244,7 @@ export interface permission {
   parentCode: string;
   order: string;
   remark: string;
+  authorizable: boolean;
 }
 
 /**

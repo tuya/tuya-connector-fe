@@ -140,11 +140,14 @@ export const getEntireTree = (opts: IOptions = { data: {} }) => {
 
 /**
  * 获取一级子节点，加速版
- * @param assetId 
- * @param opts 
- * @returns 
+ * @param assetId
+ * @param opts
+ * @returns
  */
-export const getSubTreeFast = (assetId: string, opts: IOptions = { data: {} }) => {
+export const getSubTreeFast = (
+  assetId: string,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<Asset[]>>createService({
     apiMethodName: "getSubTreeFast",
     url: `/assets/tree-fast/${assetId}`,
@@ -155,5 +158,21 @@ export const getSubTreeFast = (assetId: string, opts: IOptions = { data: {} }) =
       return <Asset[]>res;
     }
     return {};
+  });
+};
+
+export type AdminAsset = Omit<Asset, 'child_device_count'>; 
+
+export const getAdminTree = (opts: IOptions = { data: {} }) => {
+  return <Promise<AdminAsset[]>>createService({
+    apiMethodName: "getAdminTree",
+    url: `/assets/auths`,
+    method: "GET",
+    ...opts,
+  }).then((res) => {
+    if (res) {
+      return <AdminAsset[]>res;
+    }
+    return [];
   });
 };

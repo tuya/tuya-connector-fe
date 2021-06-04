@@ -21,37 +21,40 @@ var getRoleList = function (pageNo, pageSize, opts) {
 };
 exports.getRoleList = getRoleList;
 // todo 待测试
-var getEntireRoles = function (opts) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-    var result, pageSize, loopFetchRoleList;
-    return tslib_1.__generator(this, function (_a) {
-        switch (_a.label) {
-            case 0:
-                result = [];
-                pageSize = 1;
-                loopFetchRoleList = function () {
-                    return exports.getRoleList(20, pageSize, opts).then(function (res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
-                        return tslib_1.__generator(this, function (_a) {
-                            switch (_a.label) {
-                                case 0:
-                                    result.push.apply(result, res.data);
-                                    pageSize += 1;
-                                    if (!(result.length < res.total)) return [3 /*break*/, 2];
-                                    return [4 /*yield*/, loopFetchRoleList()];
-                                case 1:
-                                    _a.sent();
-                                    _a.label = 2;
-                                case 2: return [2 /*return*/];
-                            }
-                        });
-                    }); });
-                };
-                return [4 /*yield*/, loopFetchRoleList()];
-            case 1:
-                _a.sent();
-                return [2 /*return*/, result];
-        }
+var getEntireRoles = function (opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+        var result, pageSize, loopFetchRoleList;
+        return tslib_1.__generator(this, function (_a) {
+            switch (_a.label) {
+                case 0:
+                    result = [];
+                    pageSize = 1;
+                    loopFetchRoleList = function () {
+                        return exports.getRoleList(20, pageSize, opts).then(function (res) { return tslib_1.__awaiter(void 0, void 0, void 0, function () {
+                            return tslib_1.__generator(this, function (_a) {
+                                switch (_a.label) {
+                                    case 0:
+                                        result.push.apply(result, res.data);
+                                        pageSize += 1;
+                                        if (!(result.length < res.total)) return [3 /*break*/, 2];
+                                        return [4 /*yield*/, loopFetchRoleList()];
+                                    case 1:
+                                        _a.sent();
+                                        _a.label = 2;
+                                    case 2: return [2 /*return*/];
+                                }
+                            });
+                        }); });
+                    };
+                    return [4 /*yield*/, loopFetchRoleList()];
+                case 1:
+                    _a.sent();
+                    return [2 /*return*/, result];
+            }
+        });
     });
-}); };
+};
 exports.getEntireRoles = getEntireRoles;
 // export interface roleType {
 //   code: string;
