@@ -41,10 +41,10 @@ export type {
   grantPermissionByRoleParams,
   permission,
   PermissionType,
-  alarmParams,
-  alarmItem,
-  alarmResp,
-  AdminAsset,
+  // alarmParams,
+  // alarmItem,
+  // alarmResp,
+  PermissionAsset,
 } from "./lib/apis";
 export type { errorType } from "./lib/common/types";
 

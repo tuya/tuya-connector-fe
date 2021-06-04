@@ -161,17 +161,34 @@ export const getSubTreeFast = (
   });
 };
 
-export type AdminAsset = Omit<Asset, 'child_device_count'>; 
+export type PermissionAsset = Omit<Asset, 'child_device_count'>; 
 
-export const getAdminTree = (opts: IOptions = { data: {} }) => {
-  return <Promise<AdminAsset[]>>createService({
-    apiMethodName: "getAdminTree",
-    url: `/assets/auths`,
+export const getAdminPermissionTree = (opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionAsset[]>>createService({
+    apiMethodName: "getAdminPermissionTree",
+    url: `/assets`,
     method: "GET",
     ...opts,
   }).then((res) => {
     if (res) {
-      return <AdminAsset[]>res;
+      return <PermissionAsset[]>res;
+    }
+    return [];
+  });
+};
+
+export const getUserPermissionTree = (userId: string, opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionAsset[]>>createService({
+    apiMethodName: "getUserPermissionTree",
+    url: `/assets/auths`,
+    method: "GET",
+    ...opts,
+    params: {
+      userId,
+    }
+  }).then((res) => {
+    if (res) {
+      return <PermissionAsset[]>res;
     }
     return [];
   });

@@ -5,7 +5,7 @@ export type {
   loginParams,
 } from "./account";
 export * from "./account";
-export type { Asset, AssetDeep, BaseAsset, AdminAsset } from "./assets";
+export type { Asset, AssetDeep, BaseAsset, PermissionAsset } from "./assets";
 export * from "./assets";
 export type {
   DeviceInfo,
@@ -32,5 +32,5 @@ export type {
   PermissionType,
 } from "./permission";
 export * from "./permission";
-export type { alarmParams, alarmItem, alarmResp } from "./alarm";
-export * from "./alarm";
+// export type { alarmParams, alarmItem, alarmResp } from "./alarm";
+// export * from "./alarm";
