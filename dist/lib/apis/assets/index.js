@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getUserPermissionTree = exports.getAdminPermissionTree = exports.getSubTreeFast = exports.getEntireTree = exports.getSubTree = exports.searchAssetByName = exports.getChildrenAssetsByAssetId = exports.removeAsset = exports.editAsset = exports.addAsset = void 0;
+exports.grantUserAssetPermission = exports.getUserAssetPermissionTree = exports.getAdminAssetPermissionTree = exports.getSubTreeFast = exports.getEntireTree = exports.getSubTree = exports.searchAssetByName = exports.getChildrenAssetsByAssetId = exports.removeAsset = exports.editAsset = exports.addAsset = void 0;
 var tslib_1 = require("tslib");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
 var addAsset = function (assetName, parentAssetId, opts) {
@@ -78,19 +78,21 @@ var getSubTreeFast = function (assetId, opts) {
     });
 };
 exports.getSubTreeFast = getSubTreeFast;
-var getAdminPermissionTree = function (opts) {
+// fetch the whole asset tree, only admin has this right
+var getAdminAssetPermissionTree = function (opts) {
     if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign({ apiMethodName: "getAdminPermissionTree", url: "/assets", method: "GET" }, opts)).then(function (res) {
+    return service_1.default(tslib_1.__assign({ apiMethodName: "getAdminAssetPermissionTree", url: "/assets", method: "GET" }, opts)).then(function (res) {
         if (res) {
             return res;
         }
         return [];
     });
 };
-exports.getAdminPermissionTree = getAdminPermissionTree;
-var getUserPermissionTree = function (userId, opts) {
+exports.getAdminAssetPermissionTree = getAdminAssetPermissionTree;
+// fetch user asset tree
+var getUserAssetPermissionTree = function (userId, opts) {
     if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getUserPermissionTree", url: "/assets/auths", method: "GET" }, opts), { params: {
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getUserAssetPermissionTree", url: "/assets/auths", method: "GET" }, opts), { params: {
             userId: userId,
         } })).then(function (res) {
         if (res) {
@@ -99,4 +101,14 @@ var getUserPermissionTree = function (userId, opts) {
         return [];
     });
 };
-exports.getUserPermissionTree = getUserPermissionTree;
+exports.getUserAssetPermissionTree = getUserAssetPermissionTree;
+var grantUserAssetPermission = function (userId, assetIds, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "grantUserAssetPermission", url: "/assets/auths", method: "PUT" }, opts), { data: {
+            userId: userId,
+            assetIds: assetIds
+        } })).then(function () {
+        return true;
+    });
+};
+exports.grantUserAssetPermission = grantUserAssetPermission;
