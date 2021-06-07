@@ -1,19 +1,6 @@
 import createService from "../../common/service";
 import { IOptions, paginationType } from "../../common/types";
 
-// export interface permissionTemplate {}
-
-// export const getPermissionTemplateList = (opts: IOptions) => {
-//   return <Promise<permissionTemplate>>createService({
-//     apiMethodName: "getPermissionTemplateList",
-//     url: ``,
-//     method: "GET",
-//     ...opts,
-//   }).then((res) => {
-//     return <permissionTemplate>res;
-//   });
-// };
-
 export interface role {
   roleCode: string;
   roleName: string;
@@ -205,11 +192,6 @@ export const getPermissionsByRole = (roleCode: string, opts:IOptions = {data: {}
   }); 
 };
 
-/**
- * fetch my roles
- */
-export const getMyRoles = () => {};
-
 
 // todo 第二部文档，无相关api
 /**
@@ -263,8 +245,18 @@ export const getRolePermissionDetail = (roleCode: string, opts: IOptions = {data
       ...opts.data,
       roleCode,
     },
-  }).then(() => {
-    return true;
   });
 };
 
+export const getRolePermissionTemplate = (roleCode: string, opts: IOptions = {data: {}}) => {
+  return <Promise<permission[]>>createService({
+    apiMethodName: "getRolePermissionTemplate",
+    url: `/permission-template/role`,
+    method: "GET",
+    ...opts,
+    params: {
+      ...opts.data,
+      roleCode,
+    },
+  }); 
+};

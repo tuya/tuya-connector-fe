@@ -59,10 +59,6 @@ export declare const grantPermissionByRole: (params: grantPermissionByRoleParams
  */
 export declare const getPermissionsByRole: (roleCode: string, opts?: IOptions) => Promise<permission[]>;
 /**
- * fetch my roles
- */
-export declare const getMyRoles: () => void;
-/**
  * modify asset permission by account
  */
 export declare enum PermissionType {
@@ -87,3 +83,4 @@ export interface permission {
  * @returns
  */
 export declare const getRolePermissionDetail: (roleCode: string, opts?: IOptions) => Promise<permission[]>;
+export declare const getRolePermissionTemplate: (roleCode: string, opts?: IOptions) => Promise<permission[]>;

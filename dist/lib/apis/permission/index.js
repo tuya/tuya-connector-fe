@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRolePermissionDetail = exports.PermissionType = exports.getMyRoles = exports.getPermissionsByRole = exports.grantPermissionByRole = exports.editRoleName = exports.removeRole = exports.addRole = exports.RoleType = exports.getEntireRoles = exports.getRoleList = void 0;
+exports.getRolePermissionTemplate = exports.getRolePermissionDetail = exports.PermissionType = exports.getPermissionsByRole = exports.grantPermissionByRole = exports.editRoleName = exports.removeRole = exports.addRole = exports.RoleType = exports.getEntireRoles = exports.getRoleList = void 0;
 var tslib_1 = require("tslib");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
 /**
@@ -136,11 +136,6 @@ var getPermissionsByRole = function (roleCode, opts) {
     return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getPermissionsByRole", url: "/role/permissions", method: "GET" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { roleCode: roleCode }) }));
 };
 exports.getPermissionsByRole = getPermissionsByRole;
-/**
- * fetch my roles
- */
-var getMyRoles = function () { };
-exports.getMyRoles = getMyRoles;
 // todo 第二部文档，无相关api
 /**
  * modify asset permission by account
@@ -176,8 +171,11 @@ var PermissionType;
  */
 var getRolePermissionDetail = function (roleCode, opts) {
     if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getRolePermissionDetail", url: "/role/permissions", method: "GET" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { roleCode: roleCode }) })).then(function () {
-        return true;
-    });
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getRolePermissionDetail", url: "/role/permissions", method: "GET" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { roleCode: roleCode }) }));
 };
 exports.getRolePermissionDetail = getRolePermissionDetail;
+var getRolePermissionTemplate = function (roleCode, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getRolePermissionTemplate", url: "/permission-template/role", method: "GET" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { roleCode: roleCode }) }));
+};
+exports.getRolePermissionTemplate = getRolePermissionTemplate;
