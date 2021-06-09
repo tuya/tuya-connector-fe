@@ -59,8 +59,6 @@ export const getPermissionListByAccount = (uid: string, opts: IOptions = {data: 
       ...opts.data,
       uid,
     },
-  }).then((res) => {
-    res
   });
 };
 

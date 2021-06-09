@@ -20,9 +20,7 @@ exports.getAccountList = getAccountList;
  */
 var getPermissionListByAccount = function (uid, opts) {
     if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'getPermissionListByAccount', url: "/users/" + uid + "/permissions", method: 'GET' }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { uid: uid }) })).then(function (res) {
-        res;
-    });
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'getPermissionListByAccount', url: "/users/" + uid + "/permissions", method: 'GET' }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { uid: uid }) }));
 };
 exports.getPermissionListByAccount = getPermissionListByAccount;
 /**
