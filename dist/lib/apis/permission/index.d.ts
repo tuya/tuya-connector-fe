@@ -53,7 +53,7 @@ export interface grantPermissionByRoleParams {
     roleCode: string;
     permissionCodes: string[];
 }
-export declare const grantPermissionByRole: (params: grantPermissionByRoleParams, opts?: IOptions) => Promise<permission[]>;
+export declare const grantPermissionByRole: (params: grantPermissionByRoleParams, opts?: IOptions) => Promise<boolean>;
 /**
  * fetch permissions by roleCode
  */

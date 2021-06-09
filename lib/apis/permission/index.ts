@@ -162,7 +162,7 @@ export interface grantPermissionByRoleParams {
 }
 
 export const grantPermissionByRole = (params: grantPermissionByRoleParams, opts: IOptions = {data: {}}) => {
-  return <Promise<permission[]>>createService({
+  return <Promise<boolean>>createService({
     apiMethodName: "grantPermissionByRole",
     url: `/role/permissions`,
     method: "PUT",
