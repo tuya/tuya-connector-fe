@@ -90,7 +90,7 @@ var RoleType;
  */
 var addRole = function (params, opts) {
     if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "addRole", url: "/roles", method: "POST" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), params) })).then(function () {
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "addRole", url: "/roles", method: "POST" }, opts), { data: tslib_1.__assign(tslib_1.__assign({}, opts.data), params) })).then(function () {
         return true;
     });
 };

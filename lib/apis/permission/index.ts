@@ -96,7 +96,7 @@ export const addRole = (params: addRoleParams, opts: IOptions = {data: {}}) => {
     url: `/roles`,
     method: "POST",
     ...opts,
-    params: {
+    data: {
       ...opts.data,
       ...params,
     },

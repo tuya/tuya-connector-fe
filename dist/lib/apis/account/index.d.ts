@@ -3,6 +3,7 @@ export declare type UserToken = {
     nick_name: string;
     token: string;
     role_type: number;
+    userId: string;
 };
 export declare const login: (username: string, pwd: string, opts?: IOptions) => Promise<UserToken>;
 export interface loginParams {
