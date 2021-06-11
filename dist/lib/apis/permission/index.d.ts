@@ -57,7 +57,6 @@ export declare const grantPermissionByRole: (params: grantPermissionByRoleParams
 /**
  * fetch permissions by roleCode
  */
-export declare const getPermissionsByRole: (roleCode: string, opts?: IOptions) => Promise<permission[]>;
 /**
  * modify asset permission by account
  */
