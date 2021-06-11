@@ -27,6 +27,9 @@ export declare const getEntireTree: (opts?: IOptions) => Promise<AssetDeep[]>;
  */
 export declare const getSubTreeFast: (assetId: string, opts?: IOptions) => Promise<Asset[]>;
 export declare type PermissionAsset = Omit<Asset, 'child_device_count'>;
-export declare const getAdminAssetPermissionTree: (opts?: IOptions) => Promise<PermissionAsset[]>;
+export declare type PermissionAssetTree = PermissionAsset & {
+    subAssets: PermissionAssetTree[];
+};
+export declare const getEntireAssetTree: (opts?: IOptions) => Promise<PermissionAssetTree[]>;
 export declare const getUserAssetPermissionTree: (userId: string, opts?: IOptions) => Promise<PermissionAsset[]>;
 export declare const grantUserAssetPermission: (userId: string, assetIds: string[], opts?: IOptions) => Promise<boolean>;

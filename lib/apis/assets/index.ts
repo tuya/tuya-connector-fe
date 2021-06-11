@@ -162,17 +162,35 @@ export const getSubTreeFast = (
 };
 
 export type PermissionAsset = Omit<Asset, 'child_device_count'>; 
+export type PermissionAssetTree = PermissionAsset & {
+  subAssets: PermissionAssetTree[];
+};
 
 // fetch the whole asset tree, only admin has this right
-export const getAdminAssetPermissionTree = (opts: IOptions = { data: {} }) => {
-  return <Promise<PermissionAsset[]>>createService({
-    apiMethodName: "getAdminAssetPermissionTree",
-    url: `/assets`,
+// export const getAdminAssetPermissionTree = (opts: IOptions = { data: {} }) => {
+//   return <Promise<PermissionAsset[]>>createService({
+//     apiMethodName: "getAdminAssetPermissionTree",
+//     url: `/assets`,
+//     method: "GET",
+//     ...opts,
+//   }).then((res) => {
+//     if (res) {
+//       return <PermissionAsset[]>res;
+//     }
+//     return [];
+//   });
+// };
+
+// only super admin can get the whole asset tree, other user can only get what they have
+export const getEntireAssetTree = (opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionAssetTree[]>>createService({
+    apiMethodName: "getEntireAssetTree",
+    url: `/assets/all`,
     method: "GET",
     ...opts,
   }).then((res) => {
     if (res) {
-      return <PermissionAsset[]>res;
+      return <PermissionAssetTree[]>res;
     }
     return [];
   });
