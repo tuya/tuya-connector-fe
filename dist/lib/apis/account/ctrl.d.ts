@@ -62,9 +62,11 @@ export declare const editAccountName: (userId: string, nickName: string, opts?: 
  * @returns
  */
 export declare const batchRemoveAccount: (userIds: string[], opts?: IOptions) => Promise<boolean | errorType>;
+export declare const removeAccount: (userId: string, opts?: IOptions) => Promise<boolean | errorType>;
 export declare const editAccountPwd: (userName: string, newPwd: string, opts?: IOptions) => Promise<boolean | errorType>;
 /**
  * batch modify user role
  * @returns
  */
 export declare const batchModifyUserRole: (userIds: string[], roleCode: string, opts?: IOptions) => Promise<boolean | errorType>;
+export declare const modifyUserRole: (userId: string, roleCode: string, opts?: IOptions) => Promise<boolean | errorType>;

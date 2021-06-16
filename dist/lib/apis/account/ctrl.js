@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.batchModifyUserRole = exports.editAccountPwd = exports.batchRemoveAccount = exports.editAccountName = exports.addAccount = exports.getPermissionListByAccount = exports.getAccountList = void 0;
+exports.modifyUserRole = exports.batchModifyUserRole = exports.editAccountPwd = exports.removeAccount = exports.batchRemoveAccount = exports.editAccountName = exports.addAccount = exports.getPermissionListByAccount = exports.getAccountList = void 0;
 var tslib_1 = require("tslib");
 var js_sha256_1 = require("js-sha256");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
@@ -64,21 +64,13 @@ var batchRemoveAccount = function (userIds, opts) {
     });
 };
 exports.batchRemoveAccount = batchRemoveAccount;
-// todo params 修正
-// export const batchEditAccountRole = (roleCodeList: string[], opts: IOptions = {data: {}}) => {
-//   return <Promise<boolean | errorType>>createService({
-//     apiMethodName: 'batchEditAccountRole',
-//     url: `/batch-grants/user-role`,
-//     method: 'PUT',
-//     ...opts,
-//     data: {
-//       ...opts.data,
-//       roleCodeList,
-//     },
-//   }).then(() => {
-//     return true;
-//   }); 
-// };
+var removeAccount = function (userId, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'removeAccount', url: "/users/" + userId, method: 'DELETE' }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { userId: userId }) })).then(function () {
+        return true;
+    });
+};
+exports.removeAccount = removeAccount;
 var editAccountPwd = function (userName, newPwd, opts) {
     if (opts === void 0) { opts = { data: {} }; }
     return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'editAccountPwd', url: "/users/pwd", method: 'PUT' }, opts), { data: tslib_1.__assign(tslib_1.__assign({}, opts.data), { userName: userName, newPwd: js_sha256_1.sha256(newPwd) }) })).then(function () {
@@ -98,3 +90,10 @@ var batchModifyUserRole = function (userIds, roleCode, opts) {
     });
 };
 exports.batchModifyUserRole = batchModifyUserRole;
+var modifyUserRole = function (userId, roleCode, opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'modifyUserRole', url: "/users", method: 'PUT' }, opts), { data: tslib_1.__assign(tslib_1.__assign({}, opts.data), { userId: userId, roleCodes: [roleCode] }) })).then(function () {
+        return true;
+    });
+};
+exports.modifyUserRole = modifyUserRole;

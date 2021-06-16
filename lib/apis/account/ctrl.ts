@@ -144,21 +144,20 @@ export const batchRemoveAccount = (userIds: string[], opts: IOptions = {data: {}
   }); 
 };
 
-// todo params 修正
-// export const batchEditAccountRole = (roleCodeList: string[], opts: IOptions = {data: {}}) => {
-//   return <Promise<boolean | errorType>>createService({
-//     apiMethodName: 'batchEditAccountRole',
-//     url: `/batch-grants/user-role`,
-//     method: 'PUT',
-//     ...opts,
-//     data: {
-//       ...opts.data,
-//       roleCodeList,
-//     },
-//   }).then(() => {
-//     return true;
-//   }); 
-// };
+export const removeAccount = (userId: string, opts: IOptions = {data: {}}) => {
+  return <Promise<boolean | errorType>>createService({
+    apiMethodName: 'removeAccount',
+    url: `/users/${userId}`,
+    method: 'DELETE',
+    ...opts,
+    params: {
+      ...opts.data,
+      userId,
+    },
+  }).then(() => {
+    return true;
+  }); 
+};
 
 
 export const editAccountPwd = (userName: string, newPwd: string, opts: IOptions = {data: {}}) => {
@@ -197,3 +196,19 @@ export const batchModifyUserRole = (userIds: string[], roleCode: string, opts:IO
     return true;
   }); 
 }
+
+export const modifyUserRole = (userId: string, roleCode: string, opts:IOptions = {data: {}}) => {
+  return <Promise<boolean | errorType>>createService({
+    apiMethodName: 'modifyUserRole',
+    url: `/users`,
+    method: 'PUT',
+    ...opts,
+    data: {
+      ...opts.data,
+      userId,
+      roleCodes: [roleCode],
+    },
+  }).then(() => {
+    return true;
+  }); 
+};
