@@ -12,6 +12,7 @@ var service_1 = tslib_1.__importDefault(require("../../common/service"));
 var getRoleList = function (pageNo, pageSize, opts) {
     if (pageNo === void 0) { pageNo = 1; }
     if (pageSize === void 0) { pageSize = 20; }
+    if (opts === void 0) { opts = {}; }
     return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getRoleList", url: "/roles", method: "GET" }, opts), { params: {
             pageSize: pageSize,
             pageNo: pageNo,

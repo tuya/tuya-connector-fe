@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.modifyUserRole = exports.batchModifyUserRole = exports.editAccountPwd = exports.removeAccount = exports.batchRemoveAccount = exports.editAccountName = exports.addAccount = exports.getPermissionListByAccount = exports.getAccountList = void 0;
+exports.modifyUserRole = exports.batchModifyUserRole = exports.editAccountPwd = exports.removeAccount = exports.batchRemoveAccount = exports.addAccount = exports.getPermissionListByAccount = exports.getAccountList = void 0;
 var tslib_1 = require("tslib");
 var js_sha256_1 = require("js-sha256");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
@@ -36,21 +36,28 @@ var addAccount = function (params, opts) {
     });
 };
 exports.addAccount = addAccount;
-/**
- * edit account nickname
- * @param userId
- * @param nickName
- * @param opts
- * @returns
- */
-var editAccountName = function (userId, nickName, opts) {
-    if (opts === void 0) { opts = { data: {} }; }
-    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: 'editAccountName', url: "/users", method: 'PUT' }, opts), { data: tslib_1.__assign(tslib_1.__assign({}, opts.data), { userId: userId,
-            nickName: nickName }) })).then(function () {
-        return true;
-    });
-};
-exports.editAccountName = editAccountName;
+// /**
+//  * edit account nickname
+//  * @param userId 
+//  * @param nickName 
+//  * @param opts 
+//  * @returns 
+//  */
+// export const editAccountName = (userId: string, nickName: string, opts: IOptions = {data: {}}) => {
+//   return <Promise<boolean | errorType>>createService({
+//     apiMethodName: 'editAccountName',
+//     url: `/users`,
+//     method: 'PUT',
+//     ...opts,
+//     data: {
+//       ...opts.data,
+//       userId,
+//       nickName,
+//     },
+//   }).then(() => {
+//     return true;
+//   }); 
+// };
 /**
  * batch remove account
  * @param userIds

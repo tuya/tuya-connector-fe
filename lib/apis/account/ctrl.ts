@@ -100,28 +100,28 @@ export const addAccount = (params: addAccountParams, opts:IOptions = {data: {}})
 };
 
 
-/**
- * edit account nickname
- * @param userId 
- * @param nickName 
- * @param opts 
- * @returns 
- */
-export const editAccountName = (userId: string, nickName: string, opts: IOptions = {data: {}}) => {
-  return <Promise<boolean | errorType>>createService({
-    apiMethodName: 'editAccountName',
-    url: `/users`,
-    method: 'PUT',
-    ...opts,
-    data: {
-      ...opts.data,
-      userId,
-      nickName,
-    },
-  }).then(() => {
-    return true;
-  }); 
-};
+// /**
+//  * edit account nickname
+//  * @param userId 
+//  * @param nickName 
+//  * @param opts 
+//  * @returns 
+//  */
+// export const editAccountName = (userId: string, nickName: string, opts: IOptions = {data: {}}) => {
+//   return <Promise<boolean | errorType>>createService({
+//     apiMethodName: 'editAccountName',
+//     url: `/users`,
+//     method: 'PUT',
+//     ...opts,
+//     data: {
+//       ...opts.data,
+//       userId,
+//       nickName,
+//     },
+//   }).then(() => {
+//     return true;
+//   }); 
+// };
 
 /**
  * batch remove account

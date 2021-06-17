@@ -12,7 +12,7 @@ export interface roleListResp extends paginationType {
  * @param opts
  * @returns
  */
-export declare const getRoleList: (pageNo: number | undefined, pageSize: number | undefined, opts: IOptions) => Promise<roleListResp>;
+export declare const getRoleList: (pageNo?: number, pageSize?: number, opts?: IOptions) => Promise<roleListResp>;
 export declare const getEntireRoles: (opts?: IOptions) => Promise<role[]>;
 export declare enum RoleType {
     manager = "manager",

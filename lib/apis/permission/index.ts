@@ -16,7 +16,7 @@ export interface roleListResp extends paginationType {
  * @param opts 
  * @returns 
  */
-export const getRoleList = (pageNo: number = 1, pageSize: number = 20, opts: IOptions) => {
+export const getRoleList = (pageNo: number = 1, pageSize: number = 20, opts: IOptions={}) => {
   return <Promise<roleListResp>>createService({
     apiMethodName: "getRoleList",
     url: `/roles`,

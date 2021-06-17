@@ -116,7 +116,7 @@ setGlobalConfig({})
 - [removeAsset(assetId[, config])](#removeAsset) 移除指定资产
 - [getChildrenAssetsByAssetId(assetId[, config])](#getChildrenAssetsByAssetId) 获取指定资产下的资产列表
 - [searchAssetByName(assetName[, config])](#searchAssetByName) 资产模糊查询
-- [getEntireTree([config])](#getEntireTree) 获取整棵资产树
+- [getEntireTree([config])](#getEntireTree) 获取整棵资产树 （有设备信息）
 - [getSubTree(assetId[, config])](#getSubTree) 获取指定资产的子树
 
 - [getDevicesInfoByAssetId(assetId, pageNum, pageSize[, config])](#getDevicesInfoByAssetId) 获取指定资产下的设备信息
@@ -127,6 +127,26 @@ setGlobalConfig({})
 - [getDeviceDP(deviceId[,config])](#getDeviceDP) 获取设备指令
 - [getDeviceInfoWithDP(deviceId[, config])](#getDeviceInfoWithDP) 获取设备信息和DP
 - [getProjectInfo([config])](#getProjectInfo) 获取绑定设备二维码信息
+
+- [getAccountList(params[, config])](#getAccountList) 获取用户列表
+- [getPermissionListByAccount(uid[, config])](#getPermissionListByAccount) 获取用户权限列表
+- [addAccount(params[, config])](#addAccount) 添加用户
+- [batchRemoveAccount(userIds[, config])](#batchRemoveAccount) 批量删除用户
+- [removeAccount(userId[, config])](#removeAccount) 删除单个用户
+- [editAccountPwd(userName, newPwd[, config])](#editAccountPwd) 修改用户密码
+- [batchModifyUserRole(userIds, roleCode[, config])](#batchModifyUserRole) 批量修改用户密码
+- [modifyUserRole(userId, roleCode[, config])](#modifyUserRole) 修改单个用户角色
+- [getEntireAssetTree([config])](#getEntireAssetTree) 获取整个资产树（无设备信息）
+- [getUserAssetPermissionTree(userId)](#getUserAssetPermissionTree) 获取用户可用资产列表
+- [grantUserAssetPermission(userId, assetIds[, config])](#grantUserAssetPermission) 修改用户资产授权
+- [getRoleList(pageNo, pageSize, opts)](#getRoleList) 分页获取角色列表
+- [getEntireRoles()](#getEntireRoles) 获取所有角色
+- [addRole(params[, config])](#addRole) 添加角色
+- [removeRole(roleCode[, config])](#removeRole) 移除角色
+- [editRoleName(params[, config])](#editRoleName) 编辑角色名称
+- [grantPermissionByRole(params[, config])](#grantPermissionByRole) 修改角色对应的权限
+- [getRolePermissionDetail(roleCode[, config])](#getRolePermissionDetail) 获取角色的权限列表
+- [getRolePermissionTemplate(roleCode[, config])](#getRolePermissionTemplate) 获取角色权限模板
 
 ## 方法说明
 #### login
@@ -678,6 +698,274 @@ getProjectInfo().then((res) => {
 })
 ```
 
+#### getAccountList
+获取账户列表
+
+```ts
+interface user {
+  userId: string;
+  nickName: string;
+  userName: string; // login account
+  createTime: string;
+  roles: role[];
+}
+
+interface getAccountListParams {
+  searchKey: string;
+  roleCode: string;
+  pageNo: number;
+  pageSize: number;
+}
+
+interface userListResp {
+  total: number;
+  pageNo: number;
+  pageSize: number;
+  data: user[];
+}
+getAccountList({
+  searchKey: '',
+  roleCode: '',
+  pageNo: 1,
+  pageSize: 20,
+}).then((res) => {
+  return <userListResp>res;
+})
+```
+
+#### getPermissionListByAccount
+获取账户对应的权限列表
+
+```ts
+getPermissionListByAccount('uid').then((res) => {
+  return <permission[]>res;
+})
+```
+
+#### addAccount
+添加账户
+
+```ts
+interface addAccountParams {
+  password: string;
+  nickName?: string;
+  roleCodes: string[];
+  userName: string,
+  countryCode?: string,
+}
+addAccount({
+  password: '123123A',
+  roleCodes: ['manager-1000'],
+  userName: 'xxx@tuya.com',
+}).then((res) => {
+  return <boolean>res;
+})
+```
+
+#### batchRemoveAccount
+批量删除账户
+
+```ts
+batchRemoveAccount(['userId1', 'userId2']).then((res) => {
+  return <boolean>res;
+})
+```
+
+#### removeAccount
+删除单个账户
+
+```ts
+removeAccount('userID').then((res) => {
+  return <boolean>res;
+})
+```
+
+#### editAccountPwd
+修改账户密码
+
+```ts
+editAccountPwd('userName', '123456A').then((res) => {
+  return <boolean>res;
+})
+```
+
+#### batchModifyUserRole
+批量修改账户角色
+
+```ts
+batchModifyUserRole(['userId1', 'userId2'], 'manager-1000').then((res) => {
+  return <boolean>res;
+})
+```
+
+#### modifyUserRole
+修改单个账户角色
+
+```ts
+modifyUserRole('userId', 'manager-1000').then((res) => {
+  return <boolean>res;
+});
+```
+
+#### getEntireAssetTree
+获取整颗资产树（无设备数量）
+
+```ts
+type PermissionAsset = Omit<Asset, 'child_device_count'>; 
+type PermissionAssetTree = PermissionAsset & {
+  subAssets: PermissionAssetTree[];
+};
+getEntireAssetTree().then((res) => {
+  return <PermissionAsset[]>res;
+});
+```
+
+#### getUserAssetPermissionTree
+获取用户资产列表
+
+```ts
+getUserAssetPermissionTree('userId').then((res) => {
+  return <PermissionAsset[]>res;
+});
+```
+
+#### grantUserAssetPermission
+修改用户资产列表
+
+```ts
+grantUserAssetPermission('userId', ['1', '2']).then((res) => {
+  return <boolean>res;
+});
+```
+
+#### getRoleList
+获取角色列表
+
+```ts
+interface role {
+  roleCode: string;
+  roleName: string;
+}
+interface paginationType {
+  total: number;
+  pageNo: number;
+  pageSize: number;
+};
+interface roleListResp extends paginationType {
+  data: role[],
+}
+getRoleList(1, 20).then((res) => {
+  return <roleListResp>res;
+})
+```
+
+#### getEntireRoles
+获取全部角色
+
+```ts
+getEntireRoles().then((res) => {
+  return <role[]>res;
+})
+```
+
+#### addRole
+添加角色
+
+```ts
+enum RoleType {
+  manager = 'manager',
+  normal = 'normal',
+}
+
+interface addRoleParams {
+  roleName: string;
+  roleType: RoleType;
+  roleRemark?: string; // role description
+}
+addRole({
+  roleName: 'roleName',
+  roleType: 'normal',
+}).then((res) => {
+  return <boolean>res;
+})
+```
+
+#### removeRole
+删除角色
+
+```ts
+removeRole('roleCode').then((res) => {
+  return <boolean>res;
+})
+```
+
+#### editRoleName
+修改角色名
+
+```ts
+interface editRoleNameParams {
+  roleCode: string,
+  roleName: string,
+  roleRemark?: string,
+}
+editRoleName({
+  roleCode: 'normal-xxx',
+  roleName: '321',
+}).then((res) => {
+  return <boolean>res;
+})
+```
+
+#### grantPermissionByRole
+修改角色对应的权限列表
+
+```ts
+interface grantPermissionByRoleParams {
+  roleCode: string;
+  permissionCodes: string[];
+}
+grantPermissionByRole({
+  roleCode: 'normal-xxxxx',
+  permissionCodes: ['1000', '2000'],
+}).then((res) => {
+  return <boolean>res;
+})
+```
+
+#### getRolePermissionDetail
+获取角色的对应的权限列表
+
+```ts
+enum PermissionType {
+  menu = 'menu',
+  api = 'api',
+  button = 'button',
+  data = 'data',
+};
+
+interface permission {
+  permissionCode: string;
+  permissionName: string;
+  permissionType: PermissionType;
+  parentCode: string;
+  order: string;
+  remark: string;
+  authorizable: boolean;
+}
+
+getRolePermissionDetail('manager-1000').then((res) => {
+  return <permission[]>res;
+})
+```
+
+#### getRolePermissionTemplate
+获取角色权限模板
+
+```ts
+getRolePermissionTemplate('manager').then((res) => {
+  return <permission[]>res;
+})
+```
 
 ---------
 

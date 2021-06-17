@@ -48,14 +48,6 @@ export interface addAccountParams {
  */
 export declare const addAccount: (params: addAccountParams, opts?: IOptions) => Promise<boolean | errorType>;
 /**
- * edit account nickname
- * @param userId
- * @param nickName
- * @param opts
- * @returns
- */
-export declare const editAccountName: (userId: string, nickName: string, opts?: IOptions) => Promise<boolean | errorType>;
-/**
  * batch remove account
  * @param userIds
  * @param opts
