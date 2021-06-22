@@ -140,11 +140,14 @@ export const getEntireTree = (opts: IOptions = { data: {} }) => {
 
 /**
  * 获取一级子节点，加速版
- * @param assetId 
- * @param opts 
- * @returns 
+ * @param assetId
+ * @param opts
+ * @returns
  */
-export const getSubTreeFast = (assetId: string, opts: IOptions = { data: {} }) => {
+export const getSubTreeFast = (
+  assetId: string,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<Asset[]>>createService({
     apiMethodName: "getSubTreeFast",
     url: `/assets/tree-fast/${assetId}`,
@@ -155,5 +158,73 @@ export const getSubTreeFast = (assetId: string, opts: IOptions = { data: {} }) =
       return <Asset[]>res;
     }
     return {};
+  });
+};
+
+export type PermissionAsset = Omit<Asset, 'child_device_count'>; 
+export type PermissionAssetTree = PermissionAsset & {
+  subAssets: PermissionAssetTree[];
+};
+
+// fetch the whole asset tree, only admin has this right
+// export const getAdminAssetPermissionTree = (opts: IOptions = { data: {} }) => {
+//   return <Promise<PermissionAsset[]>>createService({
+//     apiMethodName: "getAdminAssetPermissionTree",
+//     url: `/assets`,
+//     method: "GET",
+//     ...opts,
+//   }).then((res) => {
+//     if (res) {
+//       return <PermissionAsset[]>res;
+//     }
+//     return [];
+//   });
+// };
+
+// only super admin can get the whole asset tree, other user can only get what they have
+export const getEntireAssetTree = (opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionAssetTree[]>>createService({
+    apiMethodName: "getEntireAssetTree",
+    url: `/assets/all`,
+    method: "GET",
+    ...opts,
+  }).then((res) => {
+    if (res) {
+      return <PermissionAssetTree[]>res;
+    }
+    return [];
+  });
+};
+
+// fetch user asset tree
+export const getUserAssetPermissionTree = (userId: string, opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionAsset[]>>createService({
+    apiMethodName: "getUserAssetPermissionTree",
+    url: `/assets/auths`,
+    method: "GET",
+    ...opts,
+    params: {
+      userId,
+    }
+  }).then((res) => {
+    if (res) {
+      return <PermissionAsset[]>res;
+    }
+    return [];
+  });
+};
+
+export const grantUserAssetPermission = (userId: string, assetIds: string[], opts: IOptions= {data: {}}) => {
+  return <Promise<boolean>>createService({
+    apiMethodName: "grantUserAssetPermission",
+    url: `/assets/auths`,
+    method: "PUT",
+    ...opts,
+    data: {
+      userId,
+      assetIds
+    }
+  }).then(() => {
+    return true;
   });
 };

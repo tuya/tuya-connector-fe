@@ -11,7 +11,7 @@ exports.apiService = apiService;
 var version = package_json_1.default.version;
 exports.version = version;
 var apiClient = function (config) {
-    return service_1.default(Object.assign({}, config, { apiMethodName: '' }));
+    return service_1.default(Object.assign({}, config, { apiMethodName: "" }));
 };
 exports.apiClient = apiClient;
 var coreSdk = {

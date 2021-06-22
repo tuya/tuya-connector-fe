@@ -3,9 +3,10 @@ import createService from "../../common/service";
 import { errorType, IOptions } from "../../common/types";
 
 export type UserToken = {
-  nick_name: string; // 用户名
+  nickName: string | null; // 用户名
   token: string;
-  role_type: number; // 角色类型，暂时先定为1
+  role_type: string[]; // 角色类型
+  userId: string;
 };
 
 export const login = (
