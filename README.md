@@ -1,5 +1,6 @@
 <center><p align="center"><img src="./tuya_logo.png" width="28%" height="28%" /></p></center>
 
+=======
 
 <center><p align="center">
   <a href="https://www.npmjs.com/package/@tuya/connector" target="_blank">
