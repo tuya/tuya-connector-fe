@@ -2,7 +2,7 @@ import { errorType, IOptions } from "../../common/types";
 export declare type UserToken = {
     nickName: string | null;
     token: string;
-    roleType: string[];
+    role_type: string[];
     userId: string;
 };
 export declare const login: (username: string, pwd: string, opts?: IOptions) => Promise<UserToken>;

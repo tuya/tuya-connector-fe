@@ -5,7 +5,7 @@ import { errorType, IOptions } from "../../common/types";
 export type UserToken = {
   nickName: string | null; // 用户名
   token: string;
-  roleType: string[]; // 角色类型
+  role_type: string[]; // 角色类型
   userId: string;
 };
 

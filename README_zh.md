@@ -155,7 +155,8 @@ email 登录
 type UserToken = {
   nick_name: string, // 用户名
   token: string,
-  role_type: number, // 角色类型，暂时先定为1
+  role_type: string[], // 角色类型
+  userId: string;
 }
 /**
  * @param username: string
