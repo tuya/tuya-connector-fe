@@ -89,7 +89,7 @@ export interface PermissionMenu {
     path: string;
     icon: string;
     microAppCode: string;
-    feResouces: string;
+    feResources: string;
     priority: number;
     subMenus: PermissionMenu[];
 }
