@@ -45,6 +45,7 @@ export type {
   // alarmItem,
   // alarmResp,
   PermissionAsset,
+  PermissionMenu,
 } from "./lib/apis";
 export type { errorType } from "./lib/common/types";
 

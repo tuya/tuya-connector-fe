@@ -83,3 +83,14 @@ export interface permission {
  */
 export declare const getRolePermissionDetail: (roleCode: string, opts?: IOptions) => Promise<permission[]>;
 export declare const getRolePermissionTemplate: (roleCode: string, opts?: IOptions) => Promise<permission[]>;
+export interface PermissionMenu {
+    nameZh: string;
+    nameEn: string;
+    path: string;
+    icon: string;
+    microAppCode: string;
+    feResouces: string;
+    priority: number;
+    subMenus: PermissionMenu[];
+}
+export declare const getPermissionMenus: (opts?: IOptions) => Promise<PermissionMenu[]>;

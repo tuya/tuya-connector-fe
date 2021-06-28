@@ -30,6 +30,7 @@ export type {
   grantPermissionByRoleParams,
   permission,
   PermissionType,
+  PermissionMenu,
 } from "./permission";
 export * from "./permission";
 // export type { alarmParams, alarmItem, alarmResp } from "./alarm";

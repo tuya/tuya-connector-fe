@@ -1,6 +1,6 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.getRolePermissionTemplate = exports.getRolePermissionDetail = exports.PermissionType = exports.grantPermissionByRole = exports.editRoleName = exports.removeRole = exports.addRole = exports.RoleType = exports.getEntireRoles = exports.getRoleList = void 0;
+exports.getPermissionMenus = exports.getRolePermissionTemplate = exports.getRolePermissionDetail = exports.PermissionType = exports.grantPermissionByRole = exports.editRoleName = exports.removeRole = exports.addRole = exports.RoleType = exports.getEntireRoles = exports.getRoleList = void 0;
 var tslib_1 = require("tslib");
 var service_1 = tslib_1.__importDefault(require("../../common/service"));
 /**
@@ -63,7 +63,7 @@ exports.getEntireRoles = getEntireRoles;
 // }
 // /**
 //  * fetch all role types
-//  * @returns 
+//  * @returns
 //  */
 // export const getRoleTypes = (opts: IOptions = {data: {}}) => {
 //   return <Promise<roleType[]>>createService({
@@ -142,7 +142,7 @@ exports.grantPermissionByRole = grantPermissionByRole;
 //       ...opts.data,
 //       roleCode,
 //     },
-//   }); 
+//   });
 // };
 // todo 第二部文档，无相关api
 /**
@@ -170,7 +170,6 @@ var PermissionType;
     PermissionType["button"] = "button";
     PermissionType["data"] = "data";
 })(PermissionType = exports.PermissionType || (exports.PermissionType = {}));
-;
 /**
  * fetch role permission detail
  * @param roleCode
@@ -187,3 +186,8 @@ var getRolePermissionTemplate = function (roleCode, opts) {
     return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getRolePermissionTemplate", url: "/permission-template/role", method: "GET" }, opts), { params: tslib_1.__assign(tslib_1.__assign({}, opts.data), { roleCode: roleCode }) }));
 };
 exports.getRolePermissionTemplate = getRolePermissionTemplate;
+var getPermissionMenus = function (opts) {
+    if (opts === void 0) { opts = { data: {} }; }
+    return service_1.default(tslib_1.__assign(tslib_1.__assign({ apiMethodName: "getPermissionMenus", url: "/app/user/oem-app-menus", method: "GET" }, opts), { params: tslib_1.__assign({}, opts.data) }));
+};
+exports.getPermissionMenus = getPermissionMenus;

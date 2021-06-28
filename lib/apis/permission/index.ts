@@ -7,16 +7,20 @@ export interface role {
 }
 
 export interface roleListResp extends paginationType {
-  data: role[],
+  data: role[];
 }
 
 /**
  * fetch the role list
- * 
- * @param opts 
- * @returns 
+ *
+ * @param opts
+ * @returns
  */
-export const getRoleList = (pageNo: number = 1, pageSize: number = 20, opts: IOptions={}) => {
+export const getRoleList = (
+  pageNo: number = 1,
+  pageSize: number = 20,
+  opts: IOptions = {}
+) => {
   return <Promise<roleListResp>>createService({
     apiMethodName: "getRoleList",
     url: `/roles`,
@@ -25,13 +29,13 @@ export const getRoleList = (pageNo: number = 1, pageSize: number = 20, opts: IOp
     params: {
       pageSize,
       pageNo,
-    }
+    },
   }).then((res) => {
     return res;
   });
 };
 
-export const getEntireRoles = async (opts: IOptions={data: {}}) => {
+export const getEntireRoles = async (opts: IOptions = { data: {} }) => {
   const result: role[] = [];
   const pageSize = 20;
   let pageNo = 1;
@@ -44,7 +48,7 @@ export const getEntireRoles = async (opts: IOptions={data: {}}) => {
       }
     });
   };
-  
+
   await loopFetchRoleList();
 
   return result;
@@ -57,7 +61,7 @@ export const getEntireRoles = async (opts: IOptions={data: {}}) => {
 
 // /**
 //  * fetch all role types
-//  * @returns 
+//  * @returns
 //  */
 // export const getRoleTypes = (opts: IOptions = {data: {}}) => {
 //   return <Promise<roleType[]>>createService({
@@ -74,8 +78,8 @@ export const getEntireRoles = async (opts: IOptions={data: {}}) => {
 // };
 
 export enum RoleType {
-  manager = 'manager',
-  normal = 'normal',
+  manager = "manager",
+  normal = "normal",
 }
 
 export interface addRoleParams {
@@ -86,11 +90,14 @@ export interface addRoleParams {
 
 /**
  * create new role
- * @param params 
- * @param opts 
- * @returns 
+ * @param params
+ * @param opts
+ * @returns
  */
-export const addRole = (params: addRoleParams, opts: IOptions = {data: {}}) => {
+export const addRole = (
+  params: addRoleParams,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<boolean>>createService({
     apiMethodName: "addRole",
     url: `/roles`,
@@ -107,9 +114,9 @@ export const addRole = (params: addRoleParams, opts: IOptions = {data: {}}) => {
 
 /**
  * remove role
- * @param roleCode 
- * @param opts 
- * @returns 
+ * @param roleCode
+ * @param opts
+ * @returns
  */
 export const removeRole = (roleCode: string, opts: IOptions = { data: {} }) => {
   return <Promise<boolean>>createService({
@@ -127,16 +134,16 @@ export const removeRole = (roleCode: string, opts: IOptions = { data: {} }) => {
 };
 
 export interface editRoleNameParams {
-  roleCode: string,
-  roleName: string,
-  roleRemark?: string,
+  roleCode: string;
+  roleName: string;
+  roleRemark?: string;
 }
 
 /**
  * modify roleName by roleCode
- * @param params 
- * @param opts 
- * @returns 
+ * @param params
+ * @param opts
+ * @returns
  */
 export const editRoleName = (
   params: editRoleNameParams,
@@ -161,7 +168,10 @@ export interface grantPermissionByRoleParams {
   permissionCodes: string[];
 }
 
-export const grantPermissionByRole = (params: grantPermissionByRoleParams, opts: IOptions = {data: {}}) => {
+export const grantPermissionByRole = (
+  params: grantPermissionByRoleParams,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<boolean>>createService({
     apiMethodName: "grantPermissionByRole",
     url: `/roles/permissions`,
@@ -173,7 +183,7 @@ export const grantPermissionByRole = (params: grantPermissionByRoleParams, opts:
     },
   }).then(() => {
     return true;
-  }); 
+  });
 };
 
 /**
@@ -189,9 +199,8 @@ export const grantPermissionByRole = (params: grantPermissionByRoleParams, opts:
 //       ...opts.data,
 //       roleCode,
 //     },
-//   }); 
+//   });
 // };
-
 
 // todo 第二部文档，无相关api
 /**
@@ -213,11 +222,11 @@ export const grantPermissionByRole = (params: grantPermissionByRoleParams, opts:
 //   });
 // };
 export enum PermissionType {
-  menu = 'menu',
-  api = 'api',
-  button = 'button',
-  data = 'data',
-};
+  menu = "menu",
+  api = "api",
+  button = "button",
+  data = "data",
+}
 
 export interface permission {
   permissionCode: string;
@@ -231,11 +240,14 @@ export interface permission {
 
 /**
  * fetch role permission detail
- * @param roleCode 
- * @param opts 
- * @returns 
+ * @param roleCode
+ * @param opts
+ * @returns
  */
-export const getRolePermissionDetail = (roleCode: string, opts: IOptions = {data: {}}) => {
+export const getRolePermissionDetail = (
+  roleCode: string,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<permission[]>>createService({
     apiMethodName: "getRolePermissionDetail",
     url: `/roles/permissions`,
@@ -248,7 +260,10 @@ export const getRolePermissionDetail = (roleCode: string, opts: IOptions = {data
   });
 };
 
-export const getRolePermissionTemplate = (roleCode: string, opts: IOptions = {data: {}}) => {
+export const getRolePermissionTemplate = (
+  roleCode: string,
+  opts: IOptions = { data: {} }
+) => {
   return <Promise<permission[]>>createService({
     apiMethodName: "getRolePermissionTemplate",
     url: `/permission-template/role`,
@@ -258,5 +273,28 @@ export const getRolePermissionTemplate = (roleCode: string, opts: IOptions = {da
       ...opts.data,
       roleCode,
     },
-  }); 
+  });
+};
+
+export interface PermissionMenu {
+  nameZh: string;
+  nameEn: string;
+  path: string;
+  icon: string;
+  microAppCode: string;
+  feResouces: string;
+  priority: number;
+  subMenus: PermissionMenu[];
+}
+
+export const getPermissionMenus = (opts: IOptions = { data: {} }) => {
+  return <Promise<PermissionMenu[]>>createService({
+    apiMethodName: "getPermissionMenus",
+    url: `/app/user/oem-app-menus`,
+    method: "GET",
+    ...opts,
+    params: {
+      ...opts.data,
+    },
+  });
 };

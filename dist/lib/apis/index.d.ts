@@ -6,5 +6,5 @@ export type { DeviceInfo, DeviceStatus, DeviceInfoList, ProjectInfo, } from "./d
 export * from "./devices";
 export type { getAccountListParams, userListResp, user, addAccountParams, } from "./account/ctrl";
 export * from "./account/ctrl";
-export type { role, roleListResp, RoleType, addRoleParams, editRoleNameParams, grantPermissionByRoleParams, permission, PermissionType, } from "./permission";
+export type { role, roleListResp, RoleType, addRoleParams, editRoleNameParams, grantPermissionByRoleParams, permission, PermissionType, PermissionMenu, } from "./permission";
 export * from "./permission";
